@@ -1,4 +1,3 @@
-import './bootstrap';
 $('.testi10').owlCarousel({
     loop: true,
     margin: 30,
