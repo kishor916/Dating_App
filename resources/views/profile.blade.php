@@ -28,8 +28,8 @@
     <div class="collapse navbar-collapse px-lg-3" id="navbarSupportedContent" style="font-weight: 600; font-size: large;">
         <div class="navbar-nav ms-auto mb-2 mb-lg-0">
             <div class="d-flex align-items-center ms-auto mb-2 mb-lg-0 ">
-                <div class="  me-2"><a href="#home" class="nav-item nav-link active">Home</a></div>
-                <div class=" me-2"> <a href="#home" class="nav-item nav-link ">Profile</a></div>
+                <div class="  me-2"><a href="{{ route('homefeed.show') }}" class="nav-item nav-link active">Home</a></div>
+                <div class=" me-2"> <a href="{{ route('profile.show') }}" class="nav-item nav-link ">Profile</a></div>
                 <div class=" me-2"> <a href="#home" class="nav-item nav-link ">Message</a></div>
                 <div class="me-2"> <a href="#home" class="nav-item nav-link ">Logout</a></div>
 
@@ -47,7 +47,7 @@
                 alt="wrapkit" class="rounded-circle img-fluid" style="max-height: 200px"/>
         </div>
         <div class="col-9 pt-5">
-            <div><h1>{{$user->first_name}}</h1></div>
+            <div><h1>Username</h1></div>
                 <div class="  d-flex">
                 <div class=" pe-4"><strong>125</strong>Post</div>
                 <div class="pe-4"><strong>125</strong>Following</div>

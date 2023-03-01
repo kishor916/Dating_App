@@ -19,4 +19,5 @@ Route::get('/',[UserController::class, "showCorrectHomepage"]);
 Route::post('/register',[UserController::class, 'register']);
 Route::post('/login',[UserController::class, 'login']);
 Route::get('/home',[UserController::class,'homeProfile']);
-Route::get('/profile/{user_id}',[UserController::class,'homefeed'])->name('profile.show');
+Route::get('/homepagefeed',[UserController::class,'homefeed'])->name('homefeed.show');
+Route::get('/profile',[UserController::class,'profile'])->name('profile.show');
