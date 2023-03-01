@@ -9,7 +9,7 @@ $('.testi10').owlCarousel({
     responsive: {
       0: {
         items: 1
-  
+
       },
       1650: {
         items: 1

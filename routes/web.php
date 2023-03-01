@@ -18,3 +18,5 @@ Route::get('/', [UserController::class, 'homepage'])->name('homepage');
 
 Route::post('/register',[UserController::class, 'register']);
 Route::post('/login',[UserController::class, 'login']);
+Route::get('/home',[UserController::class,'homeProfile']);
+Route::get('/profile/{user_id}',[UserController::class,'homefeed'])->name('profile.show');

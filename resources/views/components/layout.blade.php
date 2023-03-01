@@ -15,8 +15,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet" />
-
-    <!-- include Owl Carousel CSS -->
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet"
@@ -26,8 +24,6 @@
 </head>
 
 <body>
-
-
     <section id="header">
         <div class="container-fluid bar">
             <nav class="navbar navbar-expand-lg sticky-top">
@@ -51,9 +47,6 @@
                 </div>
             </nav>
         </div>
-
-
-
 
         <div class="container">
 
@@ -132,7 +125,7 @@
           </div>
         </div>
     </footer>
-      
+
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -150,3 +143,9 @@
 </body>
 
 </html>
+
+
+
+
+
+

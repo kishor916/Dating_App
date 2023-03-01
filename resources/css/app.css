@@ -1,3 +1,6 @@
+
+
+
 #header {
     background: linear-gradient(to left bottom, #ddabdc, #d0aae0, #c2a9e4, #b2a8e7, #a0a8e8, #8fadea, #7db1ea, #6db5e8, #62bde4, #60c4dc, #69c9d3, #78cec9);
     min-height: 85vh;
@@ -127,7 +130,7 @@ nav ul li:hover::after {
 }
 
 .service-6 a {
-	text-decoration: none;	
+	text-decoration: none;
 }
 
 .service-6 .wrap-service6-box {
