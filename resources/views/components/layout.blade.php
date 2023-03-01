@@ -34,18 +34,78 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <form class="d-flex align-items-center ms-auto">
+                    <form class="d-flex align-items-center ms-auto" action="/login" method="POST">
+                        @csrf
                         <div class="form-group me-2">
-                            <input class="form-control" type="email" placeholder="Email" aria-label="Email">
+                            <input name="email" class="form-control" type="email" placeholder="Email" aria-label="Email">
                         </div>
                         <div class="form-group me-2">
-                            <input class="form-control" type="password" placeholder="Password" aria-label="Password">
+                            <input name="password" class="form-control" type="password" placeholder="Password" aria-label="Password">
                         </div>
                         <button class="btn btn-primary me-2" type="submit">Login</button>
-                        <button type="button" class="btn btn-outline-primary mx-1">Signup</button>
+                        
                     </form>
+                    <button type="button" class="btn btn-outline-primary mx-1" data-bs-toggle="modal" data-bs-target="#signupModal">Signup</button>
+
                 </div>
             </nav>
+            <!-- Signup Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="signupModalLabel">Sign Up</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="/register">
+            @csrf
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
+              <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+            </div>
+            <div class="mb-3">
+              <label for="firstName" class="form-label">First Name</label>
+              <input type="text" name="first_name" class="form-control" id="firstName" placeholder="Enter first name">
+            </div>
+            <div class="mb-3">
+              <label for="lastName" class="form-label">Last Name</label>
+              <input type="text" name="last_name" class="form-control" id="lastName" placeholder="Enter last name">
+            </div>
+            <div class="mb-3">
+              <label for="gender" class="form-label">Gender</label>
+              <select class="form-select" id="gender" name="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="address" class="form-label">Address</label>
+              <textarea name="address" class="form-control" id="address" rows="3" placeholder="Enter address"></textarea>
+            </div>
+            {{-- <div class="mb-3">
+              <label for="dob" class="form-label">Date of Birth</label>
+              <input name="dob" type="date" class="form-control" id="dob">
+            </div> --}}
+            <div class="mb-3">
+              <label for="dob" class="form-label">Date of Birth</label>
+              <input name="date_of_birth" type="date" class="form-control" id="dob" pattern="\d{4}-\d{2}-\d{2}" required>
+          </div>
+          
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+               
+              
         </div>
 
         <div class="container">
@@ -91,8 +151,12 @@
     </section>
 
 
-
-
+    @if (session()->has('success'))
+    <div class="container container--narrow">
+            <div class="alert alert-success text-center">{{session('success')}}</div>
+            {{-- this line is being ised to check it session has been created and <success> is being used to display a temp message --}}
+    </div>
+    @endif
     {{ $slot }}
     <!-- footer begins -->
 

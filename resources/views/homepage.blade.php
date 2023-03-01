@@ -105,9 +105,8 @@
             <div class="col-md-7 text-center">
                 <h2 class="mb-3 text-white font-weight-medium"> Find Your Perfect Match Today!</h2>
                 <p class="font-weight-light text-white op-8">Don't wait any longer, sign up for Mayalu today and take the first step towards finding your soulmate!</p>
-                <a class="btn btn-danger-gradiant btn-md border-0 text-white mt-3 text-uppercase"
-                    href="#"><span>join us now</span></a>
-            </div>
+                    <button type="button" class="btn btn-danger-gradiant btn-md border-0 text-white mt-3 text-uppercase" data-bs-toggle="modal" data-bs-target="#signupModal">join us now</button>
+                </div>
         </div>
 
 
