@@ -25,10 +25,11 @@ class UserController extends Controller
         ]);
        
         if (auth()->attempt(['email' => $incomingfields['email'],'password'=>$incomingfields['password']])) {
+            if(auth()->check()){
             $request->session()->regenerate();
-            return redirect('/')->with('success','you have sucessfully loged in');
+            return view('homepage-feed')->with('success','you have sucessfully loged in');}
         }else{
-            return redirect('/')->with('success','login failed, no such user in the database');
+            return view('homepage')->with('success','login failed, no such user in the database');
         }
     }
 
