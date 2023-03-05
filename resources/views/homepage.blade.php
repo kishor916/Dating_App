@@ -59,7 +59,7 @@
                     <div class="quote-bg">
                         <h3 class="font-weight-light text-white">I had tried several dating sites in the past, but
                             Mayalu was the first one where I truly felt a connection with someone. I met my current
-                            partner on the site and we have been together for over a year now. Thank you, Mayalu!</h3>
+                            partner on the site, and we have been together for over a year now. Thank you, Mayalu!</h3>
                     </div>
                     <div class="customer-thumb my-3"><img
                             src="https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/testimonial/1.jpg"

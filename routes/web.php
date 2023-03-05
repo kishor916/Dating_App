@@ -28,4 +28,4 @@ Route::get('/profile/{user}',[UserController::class,'profile']);
 //Follow related routes
 
 Route::post('/create-follow/{user}',[FollowController::class, 'createFollow']);
-Route::post('/remove-follow/{user}',[FollowController::class, 'removefollow']);
+Route::post('/remove-follow/{user}',[FollowController::class, 'removeFollow']);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Follow;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -62,8 +63,15 @@ class UserController extends Controller
 
     }
     public function profile(User $user){
+        $currentlyFollowing = 0;
 
-        return view('profile',['firstName'=> $user->first_name, 'lastName' => $user->last_name, 'user' => $user->id]);
+//        does the current logged in user have a follow that matched the $user above
+        if (auth()->check()){
+            dd($user->id);
+            $currentlyFollowing= Follow::where([['follower_id', '=', auth()->user()->id],['following_id', '=', $user->id]]);
+        }
+
+        return view('profile',['currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name, 'user' => $user->id]);
     }
 
     public function logout(){

@@ -55,6 +55,14 @@
         {{-- this line is being ised to check it session has been created and <success> is being used to display a temp message --}}
     </div>
 @endif
+@if(session()->has('failure'))
+    <div class="container container--narrow">
+        <div class="alert alert-danger text-center">
+            {{session('failure')}}
+        </div>
+    </div>
+
+@endif
 
 
 {{ $slot }}
