@@ -10,9 +10,12 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UserController extends Controller
 {
-    public function homefeed(){
-        return view('homefeed');
-    }
+//    public function homefeed(){
+//
+//            return view('homepage');
+//        }
+
+
     public function showCorrectHomepage(){
         if (auth()->check()) {
             return view('homefeed');
@@ -30,9 +33,9 @@ class UserController extends Controller
 
         if (auth()->attempt(['email' => $incomingfields['email'],'password'=>$incomingfields['password']])) {
             $request->session()->regenerate();
-            return redirect('/homepagefeed')->with('success','you have sucessfully loged in');
-        }else{
-            return redirect('/')->with('success','login failed, no such user in the database');
+            return redirect('/')->with('success', 'You have successfully logged in.');
+        } else {
+            return redirect('/')->with('failure', 'Invalid login.');
         }
     }
 
@@ -49,12 +52,21 @@ class UserController extends Controller
 
         $incomingFields['password'] = password_hash($incomingFields['password'], PASSWORD_BCRYPT);
 
-        User::create($incomingFields);
+        $user = User::create($incomingFields);
+        auth()->login($user);
 
-        return 'file has been registered';
+       return redirect('/')->with('success','done');
 
     }
     public function profile(){
         return view('profile');
     }
+
+    public function logout(){
+
+        auth()->logout();
+        return redirect('/')->with('success', 'You are now logged out.');
+
+    }
+
 }
