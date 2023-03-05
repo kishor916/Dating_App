@@ -11,9 +11,9 @@
         <div class="col-9 pt-5">
             <div><h1>{{$firstName}} {{$lastName}}</h1></div>
             @auth
-
+{{--                {{dd($user)}}--}}
 {{--                if the user is not currentfollowing and the user is not the loggin in user the show follow button--}}
-                @if(!$currentlyFollowing AND auth()->user()->id != $user)
+                @if(!$currentlyFollowing AND auth()->user()->id !== $user)
                     <form class="ml-2 d-inline" action="/create-follow/{{$user}}" method="POST">
                         @csrf
                         <button class="btn btn-primary btn-sm">Follow <i class="fas fa-user-plus"></i></button>
@@ -35,12 +35,8 @@
 {{--                    </form>--}}
                     @endif
 
-                @if(!$currentlyFollowing AND auth()->user()->id == $user)
-                    <form class="ml-2 d-inline" action="/create-follow/{{$user}}" method="POST">
-                        @csrf
-                        <button class="btn btn-primary btn-sm">Follow <i class="fas fa-user-plus"></i></button>
-                        <!-- <button class="btn btn-danger btn-sm">Stop Following <i class="fas fa-user-times"></i></button> -->
-                    </form>
+                @if(auth()->user()->id == $user)
+                    <a href="#" class="btn btn-secondary btn-sm">Manage Avatar</a>
                 @endif
             @endauth
 

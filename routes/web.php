@@ -24,6 +24,8 @@ Route::get('/homepagefeed',[UserController::class,'homefeed'])->name('homefeed.s
 Route::post('/logout',[UserController::class, 'logout']);
 
 Route::get('/profile/{user}',[UserController::class,'profile']);
+Route::get('profile/{user:username}/followers', [UserController::class, 'profileFollowers']);
+Route::get('profile/{user:username}/following', [UserController::class, 'profileFollowing']);
 
 //Follow related routes
 

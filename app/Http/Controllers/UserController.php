@@ -67,11 +67,34 @@ class UserController extends Controller
 
 //        does the current logged in user have a follow that matched the $user above
         if (auth()->check()){
-            dd($user->id);
-            $currentlyFollowing= Follow::where([['follower_id', '=', auth()->user()->id],['following_id', '=', $user->id]]);
+
+            $currentlyFollowing= Follow::where([['user_id', '=', auth()->user()->id],['followinguser', '=', $user->id]])->count();
         }
 
         return view('profile',['currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name, 'user' => $user->id]);
+    }
+
+    public function profileFollowers(User $user){
+        $currentlyFollowing = 0;
+
+//        does the current logged in user have a follow that matched the $user above
+        if (auth()->check()){
+
+            $currentlyFollowing= Follow::where([['user_id', '=', auth()->user()->id],['followinguser', '=', $user->id]])->count();
+        }
+
+        return view('profile-followers.blade.php',['currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name, 'user' => $user->id]);
+    }
+    public function profileFollowing(User $user){
+        $currentlyFollowing = 0;
+
+//        does the current logged in user have a follow that matched the $user above
+        if (auth()->check()){
+
+            $currentlyFollowing= Follow::where([['user_id', '=', auth()->user()->id],['followinguser', '=', $user->id]])->count();
+        }
+
+        return view('profile-following',['currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name, 'user' => $user->id]);
     }
 
     public function logout(){
@@ -80,5 +103,6 @@ class UserController extends Controller
         return redirect('/')->with('success', 'You are now logged out.');
 
     }
+
 
 }
