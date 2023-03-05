@@ -61,8 +61,9 @@ class UserController extends Controller
        return redirect('/')->with('success','done');
 
     }
-    public function profile(){
-        return view('profile');
+    public function profile(User $user){
+
+        return view('profile',['firstName'=> $user->first_name, 'lastName' => $user->last_name, 'user' => $user->id]);
     }
 
     public function logout(){

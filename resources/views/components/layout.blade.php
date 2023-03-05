@@ -159,7 +159,7 @@
             <div class="container-right">
                 <img class="couples-img couples-img-desktop" src="{{ Vite::asset('resources/images/couples.png') }}"
                      alt="" />
-                {{--            <img src="{{ Vite::asset('resources/images/details.png') }}" class="details-img" />--}}
+                            <img src="{{ Vite::asset('resources/images/details.png') }}" class="details-img" />
             </div>
 
         </div>

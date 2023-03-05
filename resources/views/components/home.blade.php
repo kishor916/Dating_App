@@ -32,7 +32,7 @@
             <div class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <div class="d-flex align-items-center ms-auto mb-2 mb-lg-0 ">
                     <div class="  me-2"><a href="{{ route('homefeed.show') }}" class="nav-item nav-link active">Home</a></div>
-                    <div class=" me-2"> <a href="/profile" class="nav-item nav-link ">Profile</a></div>
+                    <div class=" me-2"> <a href="/profile/{{auth()->user()->id}}" class="nav-item nav-link ">Profile</a></div>
                     <div class=" me-2"> <a href="#home" class="nav-item nav-link ">Message</a></div>
                     <div class="me-2">
                         <form action="/logout" method="POST" class="d-inline">
