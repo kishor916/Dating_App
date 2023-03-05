@@ -1,4 +1,4 @@
-<x-layout>
+<x-home>
 
 <div class="container-fluid p-5" >
     <div class="row">
@@ -39,4 +39,4 @@
     </div>
 
 </div>
-</x-layout>
+</x-home>

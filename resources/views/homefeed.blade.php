@@ -1,4 +1,4 @@
-<x-layout>
+<x-home>
 
 
 <div class="container mt-4 pt-5">
@@ -64,7 +64,7 @@
 </div>
 
 
-</x-layout>
+</x-home>
 
 
 

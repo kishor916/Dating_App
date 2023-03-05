@@ -18,7 +18,7 @@
     @vite(['resources/js/app.js'])
 </head>
 <body style="background: linear-gradient(to left bottom, #ddabdc, #d0aae0, #c2a9e4, #b2a8e7, #a0a8e8, #8fadea, #7db1ea, #6db5e8, #62bde4, #60c4dc, #69c9d3, #78cec9);">
-{{dd($user)}};
+
 <div class="container-fluid bar">
     <nav class="navbar  fixed-top navbar-fixed-top shadow-sm navbar-expand-lg py-3 py-lg-0 px-lg-5">
         <a href="index.html" class="navbar-brand ml-lg-3">

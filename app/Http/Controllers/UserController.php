@@ -10,11 +10,14 @@ use Symfony\Contracts\Service\Attribute\Required;
 
 class UserController extends Controller
 {
-//    public function homefeed(){
-//
-//            return view('homepage');
-//        }
-
+    public function homefeed()
+    {
+        if (auth()->check()) {
+            return view('homefeed');
+        } else {
+            return view('homepage');
+        }
+    }
 
     public function showCorrectHomepage(){
         if (auth()->check()) {
@@ -33,7 +36,7 @@ class UserController extends Controller
 
         if (auth()->attempt(['email' => $incomingfields['email'],'password'=>$incomingfields['password']])) {
             $request->session()->regenerate();
-            return redirect('/')->with('success', 'You have successfully logged in.');
+            return redirect('/homepagefeed')->with('success', 'You have successfully logged in.');
         } else {
             return redirect('/')->with('failure', 'Invalid login.');
         }
