@@ -6,6 +6,10 @@
         <div class="col-md-8">
             <!-- Search bar -->
             <form action="#" method="POST" >
+                <div class="col-sm-4">
+                    <label for="">Location</label>
+                    <input type="text" name="location" id="location" >
+                </div>
 
                 <div class="form-row d-flex">
                     <div class="col-md-3 mb-3 pe-2">
@@ -64,6 +68,18 @@
 </div>
 
 
+
+    <script text="text/javascript" src=" "></script>
+
+    <script>
+        $(document).ready(function(){
+            var autocomplete;
+            var to= 'location';
+            autocomplete = new google.maps.places.Autocomplete((document.getElementById(to)), {
+                types:['geocode'],
+            })
+        })
+    </script>
 </x-home>
 
 
