@@ -38,6 +38,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
                 <form class="d-flex align-items-center ms-auto" action="/login" method="POST">
                     @csrf
                     <div class="form-group me-2">
@@ -108,13 +109,6 @@
             </div>
         </div>
 
-
-
-    </div>
-
-
-
-
     <div class="container">
 
         <div class="container-left">
@@ -146,12 +140,14 @@
                     <p class="stats-text">Members from around the world</p>
                 </div>
             </div>
+            <div class="container-right">
+                <img class="couples-img couples-img-desktop" src="{{ Vite::asset('resources/images/couples.png') }}"
+                     alt="" />
+                            <img src="{{ Vite::asset('resources/images/details.png') }}" class="details-img" />
+            </div>
+
         </div>
-        <div class="container-right">
-            <img class="couples-img couples-img-desktop" src="{{ Vite::asset('resources/images/couples.png') }}"
-                 alt="" />
-            <img src="{{ Vite::asset('resources/images/details.png') }}" class="details-img" />
-        </div>
+
 
     </div>
 
@@ -163,6 +159,14 @@
         <div class="alert alert-success text-center">{{session('success')}}</div>
         {{-- this line is being ised to check it session has been created and <success> is being used to display a temp message --}}
     </div>
+@endif
+@if(session()->has('failure'))
+    <div class="container container--narrow">
+        <div class="alert alert-danger text-center">
+            {{session('failure')}}
+        </div>
+    </div>
+
 @endif
 {{ $slot }}
 <!-- footer begins -->
@@ -198,7 +202,6 @@
 </footer>
 
 
-
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -212,11 +215,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
         integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous">
 </script>
-{{-- <script
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsDbf6HI9VCkiCZaR3udlrz8lslseyC5o&callback=initMap&v=weekly"
-defer
-></script> --}}
-
 </body>
 
 </html>

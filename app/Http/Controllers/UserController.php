@@ -4,41 +4,45 @@ namespace App\Http\Controllers;
 
 
 use App\Models\User;
+use App\Models\Follow;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Spatie\Geocoder\Geocoder;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
-use GuzzleHttp\Client;
-use Spatie\Geocoder\Geocoder;
 
 class UserController extends Controller
 {
     public function homefeed()
     {
-        return view('homefeed');
-    }
-    public function showCorrectHomepage()
-    {
-        if (auth()->check()) {
+        if (auth()->check()){
             return view('homefeed');
         } else {
             return view('homepage');
         }
     }
-    public function login(Request $request)
-    {
 
-        $incomingfields = $request->validate([
-            'email' => 'required',
-            'password' => 'required',
+    public function showCorrectHomepage(){
+        if (auth()->check()) {
+            return view('homefeed');
+        }else{
+            return view('homepage');
+        }
+    }
+   
+
+    public function login(Request $request){
+
+        $incomingfields=$request->validate([
+            'email'=>'required',
+            'password'=>'required',
         ]);
 
-        if (auth()->attempt(['email' => $incomingfields['email'], 'password' => $incomingfields['password']])) {
-            if (auth()->check()) {
-                $request->session()->regenerate();
-                return redirect('/homefeed')->with('success', 'you have sucessfully loged in');
-            }
+        if (auth()->attempt(['email' => $incomingfields['email'],'password'=>$incomingfields['password']])) {
+            $request->session()->regenerate();
+            return redirect('/homepagefeed')->with('success', 'You have successfully logged in.');
         } else {
-            return redirect('/')->with('success', 'login failed, no such user in the database');
+            return redirect('/')->with('failure', 'Invalid login.');
         }
     }
 
@@ -76,8 +80,7 @@ class UserController extends Controller
         return 'User has been registered';
     }
 
-    public function search(Request $request)
-{
+    public function search(Request $request){
     $incomingFields = $request->validate([
         'gender' => 'required',
         'min_age' => 'nullable|integer',
@@ -123,14 +126,54 @@ class UserController extends Controller
     $results = $query->get();
 
     return view('search-results', compact('results'));
-}
+    }
 
 
     
 
-    public function profile()
-    {
-        return view('profile');
+    
+    public function profile(User $user){
+        $currentlyFollowing = 0;
+
+        //does the current logged in user have a follow that matched the $user above
+        if (auth()->check()){
+
+            $currentlyFollowing= Follow::where([['user_id', '=', auth()->user()->id],['followinguser', '=', $user->id]])->count();
+        }
+
+        return view('profile-page',['currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name, 'user' => $user->id]);
     }
+
+    public function profileFollowers(User $user){
+        $currentlyFollowing = 0;
+
+       //does the current logged in user have a follow that matched the $user above
+        if (auth()->check()){
+
+            $currentlyFollowing= Follow::where([['user_id', '=', auth()->user()->id],['followinguser', '=', $user->id]])->count();
+        }
+
+        return view('profile-followers.blade.php',['currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name, 'user' => $user->id]);
+    }
+    public function profileFollowing(User $user){
+        $currentlyFollowing = 0;
+
+        //does the current logged in user have a follow that matched the $user above
+        if (auth()->check()){
+
+            $currentlyFollowing= Follow::where([['user_id', '=', auth()->user()->id],['followinguser', '=', $user->id]])->count();
+        }
+
+        return view('profile-following',['currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name, 'user' => $user->id]);
+    }
+
+    public function logout(){
+
+        auth()->logout();
+        return redirect('/')->with('success', 'You are now logged out.');
+
+    }
+
+
 }
 ?>
