@@ -46,5 +46,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    //here we are defining relationship between user and follow
+    //whoever follows the user
+    public function followers(){
+        return $this->hasMany(Follow::class, 'followinguser');
+    }
+
+    public function userFollowing(){
+        return $this->hasMany(Follow::class, 'user_id');
+    }
+
 
 }

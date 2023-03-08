@@ -42,11 +42,13 @@
 
 
                     <div class="profile-nav nav nav-tabs pt-2 mb-4">
-                        <a href="/profile/{{$user}}" class="profile-nav-link nav-item nav-link {{ Request::segment(3) == "" ? "active" : '' }} ">Posts:</a>
+{{--                        <a href="/profile/{{$user}}" class="profile-nav-link nav-item nav-link {{ Request::segment(3) == "" ? "active" : '' }} ">Posts:</a>--}}
                         <a href="/profile/{{$user}}/followers" class="profile-nav-link nav-item nav-link {{ Request::segment(3) == "followers" ? "active" : '' }} ">Followers</a>
                         <a href="/profile/{{$user}}}/following" class="profile-nav-link nav-item nav-link {{ Request::segment(3) == "following" ? "active" : '' }} ">Following</a>
                     </div>
-
+                    <div class="profile-slot-content">
+                        {{$slot}}
+                    </div>
                     <div class="pt-3 font-weight-medium">Bio</div>
                     <div>Mayalu is a dating website that helps people find their perfect match.</div>
                     <div><a href="#">www.mayalu.org.com</a></div>
@@ -56,7 +58,5 @@
             </div>
         </div>
             <section/>
-            <div class="profile-slot-content">
-                {{$slot}}
-            </div>
+
 </x-home>
