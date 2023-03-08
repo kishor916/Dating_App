@@ -21,3 +21,6 @@ Route::get('profile/{user:username}/following', [UserController::class, 'profile
 
 Route::post('/create-follow/{user}',[FollowController::class, 'createFollow']);
 Route::post('/remove-follow/{user}',[FollowController::class, 'removeFollow']);
+
+//search
+Route::get('/search',[UserController::class, 'search']);
