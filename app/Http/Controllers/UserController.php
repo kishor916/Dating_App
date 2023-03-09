@@ -57,7 +57,8 @@ class UserController extends Controller
             'password' => ['required', 'min:7'],
             'gender' => 'required',
             'date_of_birth' => 'required',
-            'address' => 'required',
+            'address' => 'required'
+
         ]);
 
         $client = new Client();
