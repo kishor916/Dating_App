@@ -12,7 +12,6 @@
             integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous">
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap"
           rel="stylesheet" />
 
@@ -38,7 +37,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="d-flex align-items-center ms-auto" action="/login" method="POST">
+                <form class="d-flex align-items-center ms-auto" action="{{route('login')}}" method="POST">
                     @csrf
                     <div class="form-group me-2">
                         <input name="email" class="form-control" type="email" placeholder="Email" aria-label="Email">
