@@ -147,9 +147,10 @@ class UserController extends Controller
             }
         }
 
-        $users = $query->get();
+        $users = $query->select('*')->get();
         dd($users);
         //return view('search', ['users' => $users]);
+
     }
 
     public function profile(User $user)
