@@ -4,16 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FollowController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::get('/',[UserController::class, "showCorrectHomepage"]);
 //User related routes
@@ -31,3 +21,6 @@ Route::get('profile/{user}/following', [UserController::class, 'profileFollowing
 
 Route::post('/create-follow/{user}',[FollowController::class, 'createFollow']);
 Route::post('/remove-follow/{user}',[FollowController::class, 'removeFollow']);
+
+//search
+Route::get('/search',[UserController::class, 'search']);

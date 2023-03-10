@@ -1,6 +1,7 @@
 import './bootstrap';
 
-// owlCarousel part
+
+// owlCarousel part 
 $('.testi10').owlCarousel({
     loop: true,
     margin: 30,
@@ -19,3 +20,11 @@ $('.testi10').owlCarousel({
     }
   })
 
+  // model section
+  document.addEventListener("DOMContentLoaded", function() {
+    var myModal = new bootstrap.Modal(document.getElementById('signupModal'), {
+      keyboard: false
+    });
+  });
+  
+ 

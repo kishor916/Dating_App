@@ -42,7 +42,11 @@ class UsersTableSeeder extends Seeder
             ]);
         }
     }
+
     /**
+=======
+     /**
+>>>>>>> address-autocomplet
      * Get random coordinates within a specified radius (in km) of a given point
      *
      * @param float $latitude
@@ -56,6 +60,7 @@ class UsersTableSeeder extends Seeder
         $v = rand() / getrandmax();
         $w = $radiusInDegrees * sqrt($u);
         $t = 2 * pi() *  $v;
+        $t = 2 * pi() * $v;
         $x = $w * cos($t);
         $y = $w * sin($t);
         $xp = $x / cos(deg2rad($latitude));
