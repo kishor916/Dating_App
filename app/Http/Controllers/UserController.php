@@ -65,7 +65,7 @@ class UserController extends Controller
     public function profile(User $user){
         $currentlyFollowing = 0;
 
-//        does the current logged in user have a follow that matched the $user above
+//        does the current logged-in user have a follow that matched the $user above
         if (auth()->check()){
 
             $currentlyFollowing= Follow::where([['user_id', '=', auth()->user()->id],['followinguser', '=', $user->id]])->count();
@@ -88,7 +88,7 @@ class UserController extends Controller
     public function profileFollowing(User $user){
         $currentlyFollowing = 0;
 
-//        does the current logged in user have a follow that matched the $user above
+//        does the current logged-in user have a follow that matched the $user above
         if (auth()->check()){
 //            return $user->userFollowing()->latest()->get();
             $currentlyFollowing= Follow::where([['user_id', '=', auth()->user()->id],['followinguser', '=', $user->id]])->count();
