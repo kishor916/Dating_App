@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Find a Date</title>
+    <title>Mayalu</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"
@@ -21,6 +21,9 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" />
+    <!--  Load the Places library-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsDbf6HI9VCkiCZaR3udlrz8lslseyC5o&libraries=places"></script>
+
     @vite(['resources/css/app.css'])
     @vite(['resources/js/app.js'])
 </head>
@@ -89,10 +92,15 @@
                                     <option value="other">Other</option>
                                 </select>
                             </div>
-                            <div class="mb-3">
+                            {{-- <div class="mb-3">
                                 <label for="address" class="form-label">Address</label>
                                 <textarea name="address" class="form-control" id="address" rows="3" placeholder="Enter address"></textarea>
+                            </div> --}}
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Address</label>
+                                <input type="text" name="address" class="form-control" id="address" placeholder="Enter your address" autocomplete="off">
                             </div>
+                            
                             
                             <div class="mb-3">
                                 <label for="dob" class="form-label">Date of Birth</label>
@@ -213,6 +221,23 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
         integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous">
 </script>
+
+{{-- address autocomplet script--}}
+<script>
+    function initAutocomplete() {
+        var input = document.getElementById('address');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+
+        // Set the types of place suggestions to return
+        autocomplete.setTypes(['address']);
+    }
+</script>
+<script>
+    // Call the initAutocomplete function when the page loads
+    google.maps.event.addDomListener(window, 'load', initAutocomplete);
+</script>
+
+
 </body>
 
 </html>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\SendVerificationEmail;
 use App\Models\Follow;
 use App\Models\User;
 use Carbon\Carbon;
@@ -31,70 +32,61 @@ class UserController extends Controller
         }
     }
 
-    public function login(Request $request)
-    {
-
-        $incomingfields = $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ]);
-
-        if (auth()->attempt(['email' => $incomingfields['email'], 'password' => $incomingfields['password']])) {
-            $request->session()->regenerate();
-            return redirect('/homepagefeed')->with('success', 'You have successfully logged in.');
-        } else {
-            return redirect('/')->with('failure', 'Invalid login.');
-        }
-    }
-
+    
     public function register(Request $request)
-    {   
-        
-        $incomingFields = $request->validate([
-            'first_name' => ['required', 'min:3', 'max:13'],
-            'last_name' => 'required',
-            'email' => ['required', 'email', Rule::unique('users', 'email')],
-            'password' => ['required', 'min:7'],
-            'gender' => 'required',
-            'date_of_birth' => 'required',
-            'address' => 'required'
+{
+    $incomingFields = $request->validate([
+        'first_name' => ['required', 'min:3', 'max:13'],
+        'last_name' => 'required',
+        'email' => ['required', 'email', Rule::unique('users', 'email')],
+        'password' => ['required', 'min:7'],
+        'gender' => 'required',
+        'date_of_birth' => 'required',
+        'address' => 'required',
+    ]);
 
-        ]);
+    $client = new Client();
+    $geocoder = new Geocoder($client);
+    $geocoder->setApiKey('YOUR_API_KEY_HERE');
 
-        $client = new Client();
-        $geocoder = new Geocoder($client);
-        $geocoder->setApiKey('AIzaSyDsDbf6HI9VCkiCZaR3udlrz8lslseyC5o');
-        $result = $geocoder->getCoordinatesForAddress($incomingFields['address']);
+    $result = $geocoder->getCoordinatesForAddress($incomingFields['address']);
 
-        if ($result) {
-            $latitude = $result['lat'];
-            $longitude = $result['lng'];
-            $incomingFields['latitude'] = $latitude;
-            $incomingFields['longitude'] = $longitude;
-        } else {
-            return redirect()->back()->withErrors(['address' => 'Invalid address']);
-        }
-
-        $incomingFields['password'] = password_hash($incomingFields['password'], PASSWORD_BCRYPT);
-
-        User::create($incomingFields);
-
-        return 'User has been registered';
+    if (!$result) {
+        return redirect()->back()->withErrors(['address' => 'Invalid address']);
     }
+
+    $incomingFields['password'] = password_hash($incomingFields['password'], PASSWORD_BCRYPT);
+    $incomingFields['latitude'] = $result['lat'];
+    $incomingFields['longitude'] = $result['lng'];
+
+    $user = User::create($incomingFields);
+
+    try {
+        dispatch(new SendVerificationEmail($user));
+    } catch (\Exception $e) {
+        // If dispatching the job fails, delete the user that was just created
+        $user->delete();
+
+        return redirect()->back()->withErrors(['email' => 'Failed to send verification email. Please try again later.']);
+    }
+
+    return 'User has been registered';
+}
+
+    
 
     public function search(Request $request)
     {
-       
+
         $query = User::query();
 
         // Filter by username
         if ($request->has('username')) {
             $query->where(function ($q) use ($request) {
                 $q->where('first_name', 'like', '%' . $request->input('username') . '%')
-                  ->orWhere('last_name', 'like', '%' . $request->input('username') . '%');
+                    ->orWhere('last_name', 'like', '%' . $request->input('username') . '%');
             });
         }
-        
 
         // Filter by gender
         if ($request->has('gender') && $request->input('gender') !== 'all') {
