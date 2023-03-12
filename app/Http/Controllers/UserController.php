@@ -32,6 +32,21 @@ class UserController extends Controller
         }
     }
 
+    public function login(Request $request){
+
+        $incomingfields=$request->validate([
+            'email'=>'required',
+            'password'=>'required',
+        ]);
+
+        if (auth()->attempt(['email' => $incomingfields['email'],'password'=>$incomingfields['password']])) {
+            $request->session()->regenerate();
+            return redirect('/homepagefeed')->with('success', 'You have successfully logged in.');
+        } else {
+            return redirect('/')->with('failure', 'Invalid login.');
+        }
+    }
+
     
     public function register(Request $request)
 {
@@ -47,7 +62,7 @@ class UserController extends Controller
 
     $client = new Client();
     $geocoder = new Geocoder($client);
-    $geocoder->setApiKey('YOUR_API_KEY_HERE');
+    $geocoder->setApiKey('AIzaSyDsDbf6HI9VCkiCZaR3udlrz8lslseyC5o');
 
     $result = $geocoder->getCoordinatesForAddress($incomingFields['address']);
 
