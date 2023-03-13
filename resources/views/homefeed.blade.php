@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html lan="eng">
-<head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"
-            integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous">
-    </script>
-    <script defer src="https://use.fontawesome.com/releases/v5.5.0/js/all.js"
-            integrity="sha384-GqVMZRt5Gn7tB9D9q7ONtcp4gtHIUEW/yG7h98J7IpE3kpi+srfFyyB/04OV6pG0" crossorigin="anonymous">
-    </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-          rel="stylesheet"/>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<x-home>
 
+<<<<<<< HEAD
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -66,10 +52,18 @@
 
 </div>
 <div class="container mt-4 pt-5 ">
+=======
+
+<div class="container mt-4 pt-5">
+>>>>>>> follow
     <div class="row">
         <div class="col-md-8">
             <!-- Search bar -->
             <form action="#" method="POST" >
+                <div class="col-sm-4">
+                    <label for="">Location</label>
+                    <input type="text" name="location" id="location" >
+                </div>
 
                 <div class="form-row d-flex">
                     <div class="col-md-3 mb-3 pe-2">
@@ -127,6 +121,7 @@
 
 
 
+<<<<<<< HEAD
 <div>
 
     <footer class="bg-light py-3 "style="border-radius: 5px">
@@ -168,7 +163,20 @@
 </script>
 </body>
 </html>
+=======
+    <script text="text/javascript" src=" "></script>
 
+
+    <script>
+        $(document).ready(function(){
+            var autocomplete;
+            var to= 'location';
+            autocomplete = new google.maps.places.Autocomplete((document.getElementById(to)), {
+                types:['geocode'],
+            })
+        })
+    </script>
+</x-home>
 
 
 

@@ -37,7 +37,26 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="d-flex align-items-center ms-auto" action="{{route('login')}}" method="POST">
+
+                <form class="d-flex align-items-center ms-auto" action="{{route('login')}}" method="POST"
+{{--                @auth--}}
+{{--                    <div class="flex-row my-3 my-md-0">--}}
+{{--                        <a href="#" class="text-white mr-2 header-search-icon" title="Search" data-toggle="tooltip"--}}
+{{--                           data-placement="bottom"><i class="fas fa-search"></i></a>--}}
+{{--                        <span class="text-white mr-2 header-chat-icon" title="Chat" data-toggle="tooltip"--}}
+{{--                              data-placement="bottom"><i class="fas fa-comment"></i></span>--}}
+{{--                        <a href='/profile/{{auth()->user()->first_name}}' class="mr-2"><img title="My Profile" data-toggle="tooltip" data-placement="bottom"--}}
+{{--                                                                                          style="width: 32px; height: 32px; border-radius: 16px"--}}
+{{--                                                                                          src="https://gravatar.com/avatar/f64fc44c03a8a7eb1d52502950879659?s=128"/></a>--}}
+
+{{--                        <form action="/logout" method="POST" class="d-inline">--}}
+{{--                            @csrf--}}
+{{--                            <button class="btn btn-sm btn-secondary">Sign Out</button>--}}
+{{--                        </form>--}}
+{{--                    </div>--}}
+{{--                --}}
+                <form class="d-flex align-items-center ms-auto" action="/login" method="POST">
+
                     @csrf
                     <div class="form-group me-2">
                         <input name="email" class="form-control" type="email" placeholder="Email" aria-label="Email">
@@ -107,50 +126,46 @@
             </div>
         </div>
 
+        <div class="container">
 
+            <div class="container-left">
+                <p class="text-small">Because you deserve better!</p>
+                <h1 class="title">
+                    Get noticed for <span class="title-s">who</span> you are,
+                    <span class="title-s">not what</span> you look like.
+                </h1>
+                <p class="text">
+                    You’re more than just a photo. You have stories to tell, and
+                    passions to share, and things to talk about that are more
+                    interesting than the weather. Because you deserve what dating
+                    deserves: better.
+                </p>
 
-    </div>
+                <div class="stats-container">
+                    <div class="stats">
+                        <h1 class="stats-title">15k+</h1>
+                        <p class="stats-text">Dates and matches made everyday</p>
+                    </div>
 
+                    <div class="stats">
+                        <h1 class="stats-title stats-title-brown">1,456</h1>
+                        <p class="stats-text">New members signup every day</p>
+                    </div>
 
-
-
-    <div class="container">
-
-        <div class="container-left">
-            <p class="text-small">Because you deserve better!</p>
-            <h1 class="title">
-                Get noticed for <span class="title-s">who</span> you are,
-                <span class="title-s">not what</span> you look like.
-            </h1>
-            <p class="text">
-                You’re more than just a photo. You have stories to tell, and
-                passions to share, and things to talk about that are more
-                interesting than the weather. Because you deserve what dating
-                deserves: better.
-            </p>
-
-            <div class="stats-container">
-                <div class="stats">
-                    <h1 class="stats-title">15k+</h1>
-                    <p class="stats-text">Dates and matches made everyday</p>
-                </div>
-
-                <div class="stats">
-                    <h1 class="stats-title stats-title-brown">1,456</h1>
-                    <p class="stats-text">New members signup every day</p>
-                </div>
-
-                <div class="stats">
-                    <h1 class="stats-title">1M+</h1>
-                    <p class="stats-text">Members from around the world</p>
+                    <div class="stats">
+                        <h1 class="stats-title">1M+</h1>
+                        <p class="stats-text">Members from around the world</p>
+                    </div>
                 </div>
             </div>
+            <div class="container-right">
+                <img class="couples-img couples-img-desktop" src="{{ Vite::asset('resources/images/couples.png') }}"
+                     alt="" />
+                            <img src="{{ Vite::asset('resources/images/details.png') }}" class="details-img" />
+            </div>
+
         </div>
-        <div class="container-right">
-            <img class="couples-img couples-img-desktop" src="{{ Vite::asset('resources/images/couples.png') }}"
-                 alt="" />
-            <img src="{{ Vite::asset('resources/images/details.png') }}" class="details-img" />
-        </div>
+
 
     </div>
 
@@ -162,6 +177,14 @@
         <div class="alert alert-success text-center">{{session('success')}}</div>
         {{-- this line is being ised to check it session has been created and <success> is being used to display a temp message --}}
     </div>
+@endif
+@if(session()->has('failure'))
+    <div class="container container--narrow">
+        <div class="alert alert-danger text-center">
+            {{session('failure')}}
+        </div>
+    </div>
+
 @endif
 {{ $slot }}
 <!-- footer begins -->

@@ -17,10 +17,10 @@
 
 </head>
 <body style="background: linear-gradient(to left bottom, #ddabdc, #d0aae0, #c2a9e4, #b2a8e7, #a0a8e8, #8fadea, #7db1ea, #6db5e8, #62bde4, #60c4dc, #69c9d3, #78cec9);">
-    <section class="vh-50" style="background: linear-gradient(to left bottom, #ddabdc, #d0aae0, #c2a9e4, #b2a8e7, #a0a8e8, #8fadea, #7db1ea, #6db5e8, #62bde4, #60c4dc, #69c9d3, #78cec9);">
+    <section class="vh-30" style="background: linear-gradient(to left bottom, #ddabdc, #d0aae0, #c2a9e4, #b2a8e7, #a0a8e8, #8fadea, #7db1ea, #6db5e8, #62bde4, #60c4dc, #69c9d3, #78cec9);">
         <div class="container h-50">
             <div class="row d-flex justify-content-center align-items-center h-50">
-                <div class="col-lg-10 col-xl-9">
+                <div class="col-lg-7 col-xl-8">
                     <div class="card text-black" style="border-radius: 25px;">
                         <div class="card-body p-md-4">
                             <div class="row justify-content-center">

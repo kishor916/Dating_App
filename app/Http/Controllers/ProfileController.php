@@ -10,7 +10,6 @@ use Intervention\Image\Facades\Image;
 class ProfileController extends Controller
 {
     public function index(User $user){
-
         return view('Profiles.profilePage',compact('user',));
 
 }
