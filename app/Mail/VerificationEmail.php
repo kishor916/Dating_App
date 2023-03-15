@@ -1,23 +1,23 @@
 <?php
-
 namespace App\Mail;
 
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\Content;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\URL;
 
 class VerificationEmail extends Mailable
 {
     use Queueable, SerializesModels;
+
     protected $user;
+
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param User $user
      */
     public function __construct(User $user)
     {
@@ -25,26 +25,22 @@ class VerificationEmail extends Mailable
     }
 
     /**
-     * Get the message envelope.
+     * Build the message.
      *
-     * @return \Illuminate\Mail\Mailables\Envelope
+     * @return $this
      */
-    public function envelope()
-    {
-        return new Envelope(
-            subject: 'Verification Email',
-        );
-    }
-
     public function build()
     {
-        $url = url('/homefeed');
+        $signedUrl = URL::temporarySignedRoute(
+            'email.verify',
+            now()->addHours(24),
+            ['user' => $this->user->id]
+        );
 
         return $this->view('verification')
-                    ->subject('Verify your email address')
-                    ->with([
-                        'user' => $this->user,
-                        'url' => $url,
-                    ]);
+            ->with([
+                'user' => $this->user,
+                'signedUrl' => $signedUrl,
+            ]);
     }
 }

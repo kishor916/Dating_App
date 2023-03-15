@@ -9,6 +9,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Spatie\Geocoder\Geocoder;
 
@@ -32,14 +33,15 @@ class UserController extends Controller
         }
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
 
-        $incomingfields=$request->validate([
-            'email'=>'required',
-            'password'=>'required',
+        $incomingfields = $request->validate([
+            'email' => 'required',
+            'password' => 'required',
         ]);
 
-        if (auth()->attempt(['email' => $incomingfields['email'],'password'=>$incomingfields['password']])) {
+        if (auth()->attempt(['email' => $incomingfields['email'], 'password' => $incomingfields['password']])) {
             $request->session()->regenerate();
             return redirect('/homepagefeed')->with('success', 'You have successfully logged in.');
         } else {
@@ -47,48 +49,71 @@ class UserController extends Controller
         }
     }
 
-    
     public function register(Request $request)
-{
-    $incomingFields = $request->validate([
-        'first_name' => ['required', 'min:3', 'max:13'],
-        'last_name' => 'required',
-        'email' => ['required', 'email', Rule::unique('users', 'email')],
-        'password' => ['required', 'min:7'],
-        'gender' => 'required',
-        'date_of_birth' => 'required',
-        'address' => 'required',
-    ]);
+    {
+        $incomingFields = $request->validate([
+            'first_name' => ['required', 'min:3', 'max:13'],
+            'last_name' => 'required',
+            'email' => ['required', 'email', Rule::unique('users', 'email')],
+            'password' => ['required', 'min:7'],
+            'gender' => 'required',
+            'date_of_birth' => 'required',
+            'address' => 'required',
+        ]);
 
-    $client = new Client();
-    $geocoder = new Geocoder($client);
-    $geocoder->setApiKey('AIzaSyDsDbf6HI9VCkiCZaR3udlrz8lslseyC5o');
+        $client = new Client();
+        $geocoder = new Geocoder($client);
+        $geocoder->setApiKey('AIzaSyDsDbf6HI9VCkiCZaR3udlrz8lslseyC5o');
+        $result = $geocoder->getCoordinatesForAddress($incomingFields['address']);
 
-    $result = $geocoder->getCoordinatesForAddress($incomingFields['address']);
+        if ($result) {
+            $latitude = $result['lat'];
+            $longitude = $result['lng'];
+            $incomingFields['latitude'] = $latitude;
+            $incomingFields['longitude'] = $longitude;
+        } else {
+            return redirect()->back()->withErrors(['address' => 'Invalid address']);
+        }
 
-    if (!$result) {
-        return redirect()->back()->withErrors(['address' => 'Invalid address']);
+        $incomingFields['password'] = password_hash($incomingFields['password'], PASSWORD_BCRYPT);
+
+        // Create the user but don't activate their account just yet
+        $user = User::create(array_merge($incomingFields, [
+            'email_verified_at' => null,
+            'verification_token' => Str::random(40),
+        ]));
+
+        try {
+            // Send the verification email
+            dispatch(new SendVerificationEmail($user));
+        } catch (\Exception$e) {
+            // If dispatching the job fails, delete the user that was just created
+            $user->delete();
+
+            return redirect()->back()->withErrors(['email' => 'Failed to send verification email. Please try again later.']);
+        }
+
+        return redirect('/')->with('success', 'Your account has been created. Please check your email for a verification link.');
     }
+    public function verifyEmail(Request $request)
+    {
+        $user = User::find($request->route('id'));
 
-    $incomingFields['password'] = password_hash($incomingFields['password'], PASSWORD_BCRYPT);
-    $incomingFields['latitude'] = $result['lat'];
-    $incomingFields['longitude'] = $result['lng'];
+        if (!$user) {
+            abort(404);
+        }
 
-    $user = User::create($incomingFields);
+        if (!hash_equals((string) $request->route('hash'), sha1($user->getEmailForVerification()))) {
+            abort(404);
+        }
 
-    try {
-        dispatch(new SendVerificationEmail($user));
-    } catch (\Exception $e) {
-        // If dispatching the job fails, delete the user that was just created
-        $user->delete();
+        $user->email_verified_at = now();
+        $user->save();
 
-        return redirect()->back()->withErrors(['email' => 'Failed to send verification email. Please try again later.']);
+        auth()->login($user);
+
+        return redirect()->route('homefeed.show');
     }
-
-    return 'User has been registered';
-}
-
-    
 
     public function search(Request $request)
     {
