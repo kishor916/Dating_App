@@ -55,15 +55,21 @@
                 </div>
             </div>
 
-                <div class="  d-flex pt-2">
+               {{-- <div class="  d-flex pt-2">
                     <div class=" pe-4"><button class="btn  btn-outline-dark text-sm mx-1 font-bold bg-gary-300 hover-gray-500"><span><strong>{{$user->posts->count()}}</strong></span><a href="/profile/{{$user->id}}">  Post</a></button></div>
                     <div class="pe-4"><button class="btn btn-outline-dark text-sm mx-1 font-bold bg-gary-300 hover-gray-500"><span><strong>15</strong></span> <a href="/profile/{{$user->id}}/follower">  followers</a></button></div>
                     <div class="pe-4"><button class="btn btn-outline-dark text-sm mx-1 font-bold bg-gary-300 hover-gray-500"><span><strong>128</strong></span> <a href="/profile/{{$user->id}}/following">  following</a></button></div>
 
-                </div>
+                </div>--}}
+
             <div class="pt-2">
                 <p class="text-xl font-bold">Bio</p>
             <p class="px-2">{{$user->bio}}</p>
+            </div>
+            <div class="profile-nav nav nav-tabs pt-2 mb-4">
+                <a href="/profile/{{$user->id}}" class="profile-nav-link text-xl nav-item text-black nav-link {{ Request::segment(3) == "" ? "active" : '' }} ">Posts:</a>
+                <a href="/profile/{{$user->id}}/follower" class="profile-nav-link text-xl text-black nav-item nav-link {{Request::segment(3) == "follower" ? "active": ""}} ">Followers</a>
+                <a href="/profile/{{$user->id}}/following" class="profile-nav-link text-xl text-black nav-item nav-link {{ Request::segment(3) == "following" ? "active" : "" }} ">Following</a>
             </div>
 
         </div>
@@ -72,7 +78,7 @@
             <div class="modal-content">
                 <div class="modal-header bg-blue-100">
                     <h5 class="modal-title" id="signupModalLabel">Upload Profile Picture</h5>
-                    <button type="button" class="text-gray-400 text-3xl font-bold hover:text-gray-500 focus:outline-none focus:text-gray-500 transition ease-in-out duration-150" data-bs-dismiss="modal" aria-label="Close">
+                    <button type="button" class=    "text-gray-400 text-3xl font-bold hover:text-gray-500 focus:outline-none focus:text-gray-500 transition ease-in-out duration-150" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body bg-blue-100">
