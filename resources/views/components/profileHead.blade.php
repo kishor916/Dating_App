@@ -1,5 +1,4 @@
-@extends('layouts.app')
-@section('content')
+<x-main>
     <div class="container pt-2">
     <div class="row">
         <div class="col-2 pt-4 ">
@@ -41,25 +40,26 @@
             <div class="d-flex pt-2">
             <div>
                 @if($user->id == Auth::user()->id)
-                <button type="button" class=" btn btn btn-outline-primary  mx-1 font-bold" data-bs-toggle="modal" data-bs-target="#signupModal">Edit Avatar</button>
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#signupModal" style="background-color: dimgray">Edit Avatar</button>
                 @endif
             </div>
             <div class="ps-3">
                 @if($user->id == Auth::user()->id)
-                <button class="btn bg-gray btn-outline-dark  mx-1 font-bold"><a href="/profile/{{$user->id}}/edit">Edit Profile</a></button>
+                <button class="btn btn-secondary"><a href="/profile/{{$user->id}}/edit">Edit Profile</a></button>
                 @endif
             </div>
                 <div class="ps-3">
                     @if($user->id == Auth::user()->id)
-                        <button class="btn btn-outline-dark mx-1 font-bold bg-gary-300 hover-gray-500"> <a href="/p/create">Add  New Post</a></button>
+                        <button class="btn btn-secondary"> <a href="/p/create">Add  New Post</a></button>
                     @endif
                 </div>
             </div>
 
                 <div class="  d-flex pt-2">
-                <div class=" pe-4"><strong>{{$user->posts->count()}}</strong>Post</div>
-                    <div class="pe-4"><strong>125</strong> <a href="/profile/{{$user->id}}/follower">follower</a></div>
-                    <div class="pe-4"><strong>125</strong>Followers</div>
+                    <div class=" pe-4"><button class="btn  btn-outline-dark text-sm mx-1 font-bold bg-gary-300 hover-gray-500"><span><strong>{{$user->posts->count()}}</strong></span><a href="/profile/{{$user->id}}">  Post</a></button></div>
+                    <div class="pe-4"><button class="btn btn-outline-dark text-sm mx-1 font-bold bg-gary-300 hover-gray-500"><span><strong>15</strong></span> <a href="/profile/{{$user->id}}/follower">  followers</a></button></div>
+                    <div class="pe-4"><button class="btn btn-outline-dark text-sm mx-1 font-bold bg-gary-300 hover-gray-500"><span><strong>128</strong></span> <a href="/profile/{{$user->id}}/following">  following</a></button></div>
+
                 </div>
             <div class="pt-2">
                 <p class="text-xl font-bold">Bio</p>
@@ -87,14 +87,14 @@
                                 <strong>{{ $errors->first('profile_picture') }}</strong>
                             @endif
                         </div>
-                        <button type="submit" class="btn ">Sign Up</button>
+                    <div class="pt-2">
+                        <button type="submit" class="btn btn-info">Post</button>
+                    </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
-
 
 
         <div class="modal fade" id="follow" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
@@ -118,17 +118,14 @@
                 </div>
             </div>
         </div>
-
-
-    <div class="row pt-5">
-        @foreach($user->posts as $post)
-        <div class="col-4 pb-4">
-            <img src="/storage/{{$post->image}}"alt="wrapkit" class="w-100">
-
+        <div class="profile-slot-content">
+            {{$slot}}
         </div>
-        @endforeach
-    </div>
 
 </div>
 <div>
-@endsection
+</div>
+    </div>
+</x-main>
+
+

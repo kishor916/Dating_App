@@ -50,7 +50,6 @@ Route::post('/logout',[UserController::class, 'logout']);*/
 Route::post('/create-follow/{user}',[FollowController::class, 'createFollow']);
 Route::post('/remove-follow/{user}',[FollowController::class, 'removeFollow']);
 
-Route::get('/profile/{user}/follower',[UserController::class,'profileFollower']);
-Route::get('/profile/{user}/following',[UserController::class,'profileFollowing']);
+Route::get('/profile/{user}/follower',[ProfileController::class,'profileFollower']);
+Route::get('/profile/{user}/following',[ProfileController::class,'profileFollowing']);
 
-Route::get('/',[UserController::class,'test'])->name('test');

@@ -17,7 +17,7 @@ class UserController extends Controller
     { if (auth()->check()) {
         $user=Auth::user();
         $cards= User::inRandomOrder()->paginate(8);
-        return view('Profiles.homefeed',compact('user','cards'));
+        return view('HomeFeedPage.homefeed',compact('user','cards'));
     }else{
         return view('homepage');
     }
@@ -99,7 +99,7 @@ class UserController extends Controller
         return view('',['currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name, 'user' => $user->id]);
     }
 
-    public function profileFollower(User $user){
+   /* public function profileFollower(User $user){
         $currentlyFollowing = 0;
 
 //        does the current logged-in user have a follow that matched the $user above
@@ -108,7 +108,7 @@ class UserController extends Controller
             $currentlyFollowing= Follow::where([['user_id', '=', auth()->user()->id],['followinguser', '=', $user->id]])->count();
         }
 
-        return view('profile-followers',['followers' =>$user->followers()->latest()->get(),'currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name, 'user' => $user->id]);
+        return view('Profiles.profile-followers',['followers' =>$user->followers()->latest()->get(),'currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name,'user'=>$user]);
     }
     public function profileFollowing(User $user){
         $currentlyFollowing = 0;
@@ -119,6 +119,6 @@ class UserController extends Controller
             $currentlyFollowing= Follow::where([['user_id', '=', auth()->user()->id],['followinguser', '=', $user->id]])->count();
         }
 
-        return view('profile-following',[ 'followings' => $user->userFollowing()->latest()->get(),'currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name, 'user' => $user->id]);
-    }
+        return view('Profiles.profile-following',[ 'followings' => $user->userFollowing()->latest()->get(),'currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name,'user'=>$user]);
+    }*/
 }
