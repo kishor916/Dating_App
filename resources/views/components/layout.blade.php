@@ -38,6 +38,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
+
                 <form class="d-flex align-items-center ms-auto" action="{{route('login')}}" method="POST"
 {{--                @auth--}}
 {{--                    <div class="flex-row my-3 my-md-0">--}}
@@ -49,12 +50,6 @@
 {{--                                                                                          style="width: 32px; height: 32px; border-radius: 16px"--}}
 {{--                                                                                          src="https://gravatar.com/avatar/f64fc44c03a8a7eb1d52502950879659?s=128"/></a>--}}
 
-{{--                        <form action="/logout" method="POST" class="d-inline">--}}
-{{--                            @csrf--}}
-{{--                            <button class="btn btn-sm btn-secondary">Sign Out</button>--}}
-{{--                        </form>--}}
-{{--                    </div>--}}
-{{--                --}}
                 <form class="d-flex align-items-center ms-auto" action="/login" method="POST">
 
                     @csrf
@@ -110,10 +105,7 @@
                                 <label for="address" class="form-label">Address</label>
                                 <textarea name="address" class="form-control" id="address" rows="3" placeholder="Enter address"></textarea>
                             </div>
-                            {{-- <div class="mb-3">
-                              <label for="dob" class="form-label">Date of Birth</label>
-                              <input name="dob" type="date" class="form-control" id="dob">
-                            </div> --}}
+
                             <div class="mb-3">
                                 <label for="dob" class="form-label">Date of Birth</label>
                                 <input name="date_of_birth" type="date" class="form-control" id="dob" pattern="\d{4}-\d{2}-\d{2}" required>
@@ -126,37 +118,37 @@
             </div>
         </div>
 
-        <div class="container">
+    <div class="container">
 
-            <div class="container-left">
-                <p class="text-small">Because you deserve better!</p>
-                <h1 class="title">
-                    Get noticed for <span class="title-s">who</span> you are,
-                    <span class="title-s">not what</span> you look like.
-                </h1>
-                <p class="text">
-                    You’re more than just a photo. You have stories to tell, and
-                    passions to share, and things to talk about that are more
-                    interesting than the weather. Because you deserve what dating
-                    deserves: better.
-                </p>
+        <div class="container-left">
+            <p class="text-small">Because you deserve better!</p>
+            <h1 class="title">
+                Get noticed for <span class="title-s">who</span> you are,
+                <span class="title-s">not what</span> you look like.
+            </h1>
+            <p class="text">
+                You’re more than just a photo. You have stories to tell, and
+                passions to share, and things to talk about that are more
+                interesting than the weather. Because you deserve what dating
+                deserves: better.
+            </p>
 
-                <div class="stats-container">
-                    <div class="stats">
-                        <h1 class="stats-title">15k+</h1>
-                        <p class="stats-text">Dates and matches made everyday</p>
-                    </div>
-
-                    <div class="stats">
-                        <h1 class="stats-title stats-title-brown">1,456</h1>
-                        <p class="stats-text">New members signup every day</p>
-                    </div>
-
-                    <div class="stats">
-                        <h1 class="stats-title">1M+</h1>
-                        <p class="stats-text">Members from around the world</p>
-                    </div>
+            <div class="stats-container">
+                <div class="stats">
+                    <h1 class="stats-title">15k+</h1>
+                    <p class="stats-text">Dates and matches made everyday</p>
                 </div>
+
+                <div class="stats">
+                    <h1 class="stats-title stats-title-brown">1,456</h1>
+                    <p class="stats-text">New members signup every day</p>
+                </div>
+
+                <div class="stats">
+                    <h1 class="stats-title">1M+</h1>
+                    <p class="stats-text">Members from around the world</p>
+                </div>
+            </div>
             </div>
             <div class="container-right">
                 <img class="couples-img couples-img-desktop" src="{{ Vite::asset('resources/images/couples.png') }}"
@@ -164,7 +156,7 @@
                             <img src="{{ Vite::asset('resources/images/details.png') }}" class="details-img" />
             </div>
 
-        </div>
+
 
 
     </div>

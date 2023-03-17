@@ -12,16 +12,21 @@
                 <h1 class="text-5xl font-bold">{{$user->first_name}} <span>{{$user->last_name}}</span></h1>
                     {{--                {{dd($user)}}--}}
                     {{--                if the user is not currentfollowing and the user is not the loggin in user the show follow button--}}
+                @if(!$currentlyFollowing AND auth()->user()->id !== $user->id)
                     <form class="ml-2 d-inline" action="/create-follow/{{$user->id}}" method="POST">
                         @csrf
                         <button class="btn btn-primary btn-sm">Follow <i class="fas fa-user-plus"></i></button>
                         <!-- <button class="btn btn-danger btn-sm">Stop Following <i class="fas fa-user-times"></i></button> -->
                     </form>
+                @endif
+                @if($currentlyFollowing)
                 <form class="ml-2 d-inline" action="/remove-follow/{{$user->id}}" method="POST">
                     @csrf
                     <button class="btn btn-primary btn-sm">Unfollow <i class="fas fa-user-plus"></i></button>
                     <!-- <button class="btn btn-danger btn-sm">Stop Following <i class="fas fa-user-times"></i></button> -->
                 </form>
+                @endif
+
 
                     {{--@if($currentlyFollowing)
                         <form class="ml-2 d-inline" action="/remove-follow/{{$user}}" method="POST">
@@ -66,9 +71,10 @@
                 <p class="text-xl font-bold">Bio</p>
             <p class="px-2">{{$user->bio}}</p>
             </div>
+
             <div class="profile-nav nav nav-tabs pt-2 mb-4">
-                <a href="/profile/{{$user->id}}" class="profile-nav-link text-xl nav-item text-black nav-link {{ Request::segment(3) == "" ? "active" : '' }} ">Posts:</a>
-                <a href="/profile/{{$user->id}}/follower" class="profile-nav-link text-xl text-black nav-item nav-link {{Request::segment(3) == "follower" ? "active": ""}} ">Followers</a>
+                <a href="/profile/{{$user->id}}" class="profile-nav-link text-xl nav-item text-black nav-link {{ Request::segment(3) == "" ? "active" : '' }} "><span><strong>{{$user->posts->count()}}</strong></span> Posts:</a>
+                <a href="/profile/{{$user->id}}/follower" class="profile-nav-link text-xl text-black nav-item nav-link {{Request::segment(3) == "follower" ? "active": ""}} "> <span><strong></strong></span> Followers</a>
                 <a href="/profile/{{$user->id}}/following" class="profile-nav-link text-xl text-black nav-item nav-link {{ Request::segment(3) == "following" ? "active" : "" }} ">Following</a>
             </div>
 

@@ -15,7 +15,6 @@ use App\Http\Controllers\UserController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/',[UserController::class, "showCorrectHomepage"])->name('home');
 
 Route::get('/homepagefeed',[UserController::class,'homefeed'])->name('homefeed.show')->middleware('auth');
@@ -50,6 +49,10 @@ Route::post('/logout',[UserController::class, 'logout']);*/
 Route::post('/create-follow/{user}',[FollowController::class, 'createFollow']);
 Route::post('/remove-follow/{user}',[FollowController::class, 'removeFollow']);
 
+
 Route::get('/profile/{user}/follower',[ProfileController::class,'profileFollower']);
 Route::get('/profile/{user}/following',[ProfileController::class,'profileFollowing']);
+
+//search
+Route::get('/search',[UserController::class, 'search']);
 

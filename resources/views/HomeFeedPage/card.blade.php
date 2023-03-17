@@ -1,4 +1,4 @@
-<x-homefeed :user="$user">
+<x-homefeed :user="$user" :cards="$cards">
 
     <!-- Card section -->
 
