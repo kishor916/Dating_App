@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FollowController;
-
+use App\Http\Controllers\MessagesController;
 
 Route::get('/',[UserController::class, "showCorrectHomepage"]);
 //User related routes
@@ -24,3 +24,11 @@ Route::post('/remove-follow/{user}',[FollowController::class, 'removeFollow']);
 
 //search
 Route::get('/search',[UserController::class, 'search']);
+
+
+//messages routes
+
+Route::get('/messages',[MessagesController::class, 'inbox'])->name('messages.index');
+Route::get('/messages/{user}', [MessagesController::class, 'show'])->name('messages.show');
+Route::post('/messages/{user}',[MessagesController::class, 'store'])->name('messages.store');
+Route::get('/createMessage', [MessagesController::class, 'createMessage'])->name('message.create');

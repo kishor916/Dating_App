@@ -23,9 +23,9 @@
 </head>
 
 <body style="background: linear-gradient(to left bottom, #ddabdc, #d0aae0, #c2a9e4, #b2a8e7, #a0a8e8, #8fadea, #7db1ea, #6db5e8, #62bde4, #60c4dc, #69c9d3, #78cec9); margin: 100px 100px;">
-    
 
-  
+
+
 
 
     <nav class="navbar  fixed-top navbar-fixed-top shadow-sm navbar-expand-lg py-3 py-lg-0 px-lg-5">
@@ -45,7 +45,7 @@
                     </div>
                     <div class=" me-2"> <a href="/profile/{{ auth()->user()->id }}"
                             class="nav-item nav-link ">Profile</a></div>
-                    <div class=" me-2"> <a href="#home" class="nav-item nav-link ">Message</a></div>
+                    <div class=" me-2"> <a href="/messages" class="nav-item nav-link ">Message</a></div>
                     <div class="me-2">
                         <form action="/logout" method="POST" class="d-inline">
                             @csrf

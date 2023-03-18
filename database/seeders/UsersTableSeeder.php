@@ -24,7 +24,7 @@ class UsersTableSeeder extends Seeder
 
         for ($i = 0; $i < 500; $i++) {
             // Generate random coordinates within 100km of the given user
-            $coords = $this->getRandomCoordinates($latitude, $longitude, 100);
+            $coords = $this->getRandomCoordinates($latitude, $longitude, 20);
 
             DB::table('users')->insert([
                 'first_name' => $faker->firstName,
@@ -59,7 +59,7 @@ class UsersTableSeeder extends Seeder
         $u = rand() / getrandmax();
         $v = rand() / getrandmax();
         $w = $radiusInDegrees * sqrt($u);
-        $t = 2 * pi() *  $v;
+//        $t = 2 * pi() *  $v;
         $t = 2 * pi() * $v;
         $x = $w * cos($t);
         $y = $w * sin($t);

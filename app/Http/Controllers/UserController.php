@@ -79,7 +79,7 @@ class UserController extends Controller
 
         User::create($incomingFields);
 
-        return 'User has been registered';
+        return redirect('/')->with('success', 'Thank you for creating an account.');
     }
 
     public function search(Request $request)

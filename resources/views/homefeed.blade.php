@@ -1,5 +1,6 @@
 <x-home>
     <form class="form-inline" method="get" action="/search">
+
         <div class="form-group mx-sm-3 mb-2">
           <label for="username" class="sr-only">Search by username</label>
           <input type="text" class="form-control" id="search" name="username" placeholder="Search by username...">
@@ -47,5 +48,5 @@
         </div>
         <button type="submit" class="btn btn-primary mb-2">Search</button>
       </form>
-      
+
 </x-home>

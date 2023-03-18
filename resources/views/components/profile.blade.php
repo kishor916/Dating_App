@@ -27,11 +27,11 @@
                                 <button class="btn btn-danger btn-sm">Stop Following <i class="fas fa-user-times"></i></button>
                             </form>
 
-                            {{--                    <form class="ml-2 d-inline" action="#" method="POST">--}}
-                            {{--                        @csrf--}}
+{{--                            <form class="ml-2 d-inline" action="#" method="POST">--}}
+{{--                                @csrf--}}
 
-                            {{--                        <button class="btn btn-primary btn-sm">Message <i class="fas fa-user-plus"></i></button>--}}
-                            {{--                    </form>--}}
+                                <button class="btn btn-primary btn-sm"><a href={{route('message.create')}}>Message</a></button>
+{{--                            </form>--}}
                         @endif
 
                         @if(auth()->user()->id == $user)
