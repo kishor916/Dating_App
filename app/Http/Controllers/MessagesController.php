@@ -42,8 +42,8 @@ class MessagesController extends Controller
         return redirect()->back();
     }
 
-    public function createMessage(){
-        return view('create-message');
-    }
+//    public function createMessage(){
+//        return view('create-message');
+//    }
 
 }

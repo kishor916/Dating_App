@@ -27,11 +27,10 @@
                                 <button class="btn btn-danger btn-sm">Stop Following <i class="fas fa-user-times"></i></button>
                             </form>
 
-{{--                            <form class="ml-2 d-inline" action="#" method="POST">--}}
-{{--                                @csrf--}}
+                        @endif
 
-                                <button class="btn btn-primary btn-sm"><a href={{route('message.create')}}>Message</a></button>
-{{--                            </form>--}}
+                        @if($currentlyFollowing && $currentFollowers)
+                            <button class="btn"><a class="btn btn-primary" href={{route('messages.create')}}>Message</a></button>
                         @endif
 
                         @if(auth()->user()->id == $user)

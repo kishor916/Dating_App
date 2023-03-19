@@ -28,7 +28,7 @@ Route::get('/search',[UserController::class, 'search']);
 
 //messages routes
 
-Route::get('/messages',[MessagesController::class, 'inbox'])->name('messages.index');
+Route::get('/messages',[MessagesController::class, 'inbox'])->name('messages.create');
 Route::get('/messages/{user}', [MessagesController::class, 'show'])->name('messages.show');
 Route::post('/messages/{user}',[MessagesController::class, 'store'])->name('messages.store');
-Route::get('/createMessage', [MessagesController::class, 'createMessage'])->name('message.create');
+

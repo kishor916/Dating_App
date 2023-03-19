@@ -1,4 +1,4 @@
-<x-profile :firstName="$firstName" :lastName="$lastName"  :user="$user" :currentlyFollowing="$currentlyFollowing" >
+<x-profile :firstName="$firstName" :lastName="$lastName"  :user="$user" :currentlyFollowing="$currentlyFollowing" :currentFollowers="$currentFollowers" >
 
         @foreach($followings as $following)
         <a href="/profile/{{$following->userBeingFollowed->id}}" class="list-group-item list-group-item-action">

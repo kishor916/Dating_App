@@ -156,40 +156,45 @@ class UserController extends Controller
     public function profile(User $user)
     {
         $currentlyFollowing = 0;
-
+        $currentFollowers = 0;
         //does the current logged in user have a follow that matched the $user above
         if (auth()->check()) {
 
             $currentlyFollowing = Follow::where([['user_id', '=', auth()->user()->id], ['followinguser', '=', $user->id]])->count();
+            $currentFollowers = Follow::where([['user_id', '=', $user->id], ['followinguser', '=', auth()->user()->id]])->count();
         }
 
-        return view('profile-page', ['currentlyFollowing' => $currentlyFollowing, 'firstName' => $user->first_name, 'lastName' => $user->last_name, 'user' => $user->id]);
+        return view('profile-page', ['currentFollowers'=>$currentFollowers, 'currentlyFollowing' => $currentlyFollowing, 'firstName' => $user->first_name, 'lastName' => $user->last_name, 'user' => $user->id]);
     }
 
     public function profileFollowers(User $user)
     {
         $currentlyFollowing = 0;
+        $currentFollowers = 0;
 
 //        does the current logged in user have a follow that matched the $user above
         if (auth()->check()){
 //            return $user->followers()->latest()->get();
             $currentlyFollowing= Follow::where([['user_id', '=', auth()->user()->id],['followinguser', '=', $user->id]])->count();
+            $currentFollowers = Follow::where([['user_id', '=', $user->id], ['followinguser', '=', auth()->user()->id]])->count();
         }
 
-        return view('profile-followers',['followers' =>$user->followers()->latest()->get(),'currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name, 'user' => $user->id]);
+        return view('profile-followers',['currentFollowers'=>$currentFollowers,'followers' =>$user->followers()->latest()->get(),'currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name, 'user' => $user->id]);
     }
     public function profileFollowing(User $user)
     {
         $currentlyFollowing = 0;
+        $currentFollowers = 0;
 
 
 //        does the current logged in user have a follow that matched the $user above
         if (auth()->check()) {
 //            return $user->userFollowing()->latest()->get();
             $currentlyFollowing = Follow::where([['user_id', '=', auth()->user()->id], ['followinguser', '=', $user->id]])->count();
+            $currentFollowers = Follow::where([['user_id', '=', $user->id], ['followinguser', '=', auth()->user()->id]])->count();
         }
 
-        return view('profile-following', ['followings' => $user->userFollowing()->latest()->get(), 'currentlyFollowing' => $currentlyFollowing, 'firstName' => $user->first_name, 'lastName' => $user->last_name, 'user' => $user->id]);
+        return view('profile-following', ['currentFollowers'=>$currentFollowers,'followings' => $user->userFollowing()->latest()->get(), 'currentlyFollowing' => $currentlyFollowing, 'firstName' => $user->first_name, 'lastName' => $user->last_name, 'user' => $user->id]);
     }
 
     public function logout()
