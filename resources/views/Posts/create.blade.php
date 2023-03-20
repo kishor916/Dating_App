@@ -17,10 +17,9 @@
 
 </head>
 <body style="background: linear-gradient(to left bottom, #ddabdc, #d0aae0, #c2a9e4, #b2a8e7, #a0a8e8, #8fadea, #7db1ea, #6db5e8, #62bde4, #60c4dc, #69c9d3, #78cec9);">
-<div class="container " style="height: 500px">
+<div class="container ">
     <form action="/p" enctype="multipart/form-data" method="post">
         @csrf
-
         <div class="row ">
             <div class="col-5 offset-3">
 
@@ -56,43 +55,12 @@
 
                 <div class="row pt-4">
                     <button class="btn btn-primary">Add New Post</button>
+
                 </div>
 
             </div>
         </div>
     </form>
-</div>
-
-
-<footer class="bg-light py-3 "style="border-radius: 5px">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                <h5>About Mayalu</h5>
-                <p class="text-muted">Mayalu is a dating website that helps people find their perfect match.</p>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                <h5>Links</h5>
-                <ul class="list-unstyled">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                <h5>Contact Us</h5>
-                <ul class="list-unstyled">
-                    <li>Email: info@mayalu.com</li>
-                    <li>Phone: +1 555-123-4567</li>
-                    <li>Address: 123 Main Street, Sydeny, USA</li>
-                </ul>
-            </div>
-        </div>
-        <div class="text-center mt-4">
-            <p class="mb-0">© 2023 Mayalu. All rights reserved.</p>
-        </div>
-    </div>
-</footer>
 </div>
 </body>
 </html>

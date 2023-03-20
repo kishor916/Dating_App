@@ -48,7 +48,7 @@
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <div class="form-outline flex-fill mb-0">
                                                 <textarea name="bio" cols="20" rows="6" type="text" class="form-control"
-                                                          placeholder="Bio"></textarea>
+                                                          placeholder="Bio" value="{{old('bio')?? $user->bio}}"></textarea>
                                                 <label class="form-label" for="form3Example4c">Bio</label>
                                             </div>
                                         </div>
@@ -67,14 +67,14 @@
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <div class="form-outline flex-fill mb-0">
                                                 <label for="address" class="form-label">Address</label>
-                                                <textarea name="address" class="form-control" id="address" rows="3" placeholder="Enter address"></textarea>
+                                                <textarea name="address" value="{{old('address')?? $user->address}}" class="form-control" id="address" rows="3" placeholder="Enter address"></textarea>
                                             </div>
                                         </div>
 
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <div class="form-outline flex-fill mb-0">
                                                 <label for="dob" class="form-label">Date of Birth</label>
-                                                <input name="date_of_birth" type="date" class="form-control" id="dob" pattern="\d{4}-\d{2}-\d{2}" required>
+                                                <input name="date_of_birth" value="{{old('dob')?? $user->date_of_birth}}"type="date" class="form-control" id="dob" pattern="\d{4}-\d{2}-\d{2}" required>
 
                                             </div>
                                         </div>

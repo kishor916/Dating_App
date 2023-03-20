@@ -17,34 +17,22 @@ use App\Http\Controllers\UserController;
 */
 Route::get('/',[UserController::class, "showCorrectHomepage"])->name('home');
 
-Route::get('/homepagefeed',[UserController::class,'homefeed'])->name('homefeed.show')->middleware('auth');
+Route::get('/homepagefeed',[UserController::class,'homefeed'])->name('homefeed.show');
 
 Route::post('/register',[UserController::class, 'register']);
 Route::post('/login',[UserController::class, 'login'])->name('login');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
-Route::post('/p',[PostsController::class,'store'])->middleware('auth');
-Route::get('/p/create',[PostsController::class,'create'])->middleware('auth');
+Route::get('/p/create',[PostsController::class,'create']);
+Route::post('/p',[PostsController::class,'store']);
+Route::get('/p/create',[PostsController::class,'create']);
 
-Route::post('/i',[ProfileController::class,'store'])->middleware('auth');
+Route::post('/i',[ProfileController::class,'store']);
 
 
-Route::get('/profile/{user}',[ProfileController::class,'index'])->name('profile.show');
-Route::get('/profile/{user}/edit',[ProfileController::class,'edit'])->name('profile.edit')->middleware('auth');
-Route::patch('/profile/{user}',[ProfileController::class,'update'])->name('profile.update')->middleware('auth');
-
-//User related routes
-/*Route::post('/register',[UserController::class, 'register']);
-Route::post('/login',[UserController::class, 'login']);
-Route::get('/home',[UserController::class,'homeProfile']);
-Route::get('/homepagefeed',[UserController::class,'homefeed'])->name('homefeed.show');
-Route::post('/logout',[UserController::class, 'logout']);*/
-
-//Route::get('/profile/{user}',[UserController::class,'profile']);
-//Route::get('profile/{user}/followers', [UserController::class, 'profileFollowers']);
-//Route::get('profile/{user}/following', [UserController::class, 'profileFollowing']);
-
-//Follow related routes
+Route::get('/profile/{user}',[ProfileController::class,'index']);
+Route::get('/profile/{user}/edit',[ProfileController::class,'edit'])->middleware('auth');
+Route::patch('/profile/{user}',[ProfileController::class,'update']);
 
 Route::post('/create-follow/{user}',[FollowController::class, 'createFollow']);
 Route::post('/remove-follow/{user}',[FollowController::class, 'removeFollow']);

@@ -14,7 +14,6 @@ use Spatie\Geocoder\Geocoder;
 
 class UserController extends Controller
 {
-
     public function homefeed()
     { if (auth()->check()) {
         $user=Auth::user();
@@ -26,11 +25,7 @@ class UserController extends Controller
 
 
     }
-   /* public function edit(User $user){
 
-        return view('Profiles.edit',compact('user'));
-
-    }*/
     public function showCorrectHomepage()
     {
         return view('homepage');
@@ -169,47 +164,9 @@ class UserController extends Controller
             }
         }
 
-        $users = $query->select('*')->get();
-        dd($users);
-        //return view('search', ['users' => $users]);
+        $users = $query->select('*')->paginate(4);
 
-    }
+        return view('HomeFeedPage.search', ['users' => $users]);
 
-    public function profile(User $user)
-    {
-        $currentlyFollowing = 0;
-
-        //does the current logged in user have a follow that matched the $user above
-        if (auth()->check()) {
-
-            $currentlyFollowing = Follow::where([['user_id', '=', auth()->user()->id], ['followinguser', '=', $user->id]])->count();
-        }
-
-        return view('profile-page', ['currentlyFollowing' => $currentlyFollowing, 'firstName' => $user->first_name, 'lastName' => $user->last_name, 'user' => $user->id]);
-    }
-
-    public function profileFollowers(User $user)
-    {
-        $currentlyFollowing = 0;
-
-        //does the current logged in user have a follow that matched the $user above
-        if (auth()->check()) {
-
-            $currentlyFollowing = Follow::where([['user_id', '=', auth()->user()->id], ['followinguser', '=', $user->id]])->count();
-        }
-
-        return view('profile-followers.blade.php', ['currentlyFollowing' => $currentlyFollowing, 'firstName' => $user->first_name, 'lastName' => $user->last_name, 'user' => $user->id]);
-    }
-    public function profileFollowing(User $user)
-    {
-        $currentlyFollowing = 0;
-
-        //does the current logged in user have a follow that matched the $user above
-        if (auth()->check()) {
-
-            $currentlyFollowing = Follow::where([['user_id', '=', auth()->user()->id], ['followinguser', '=', $user->id]])->count();
-        }
-
-        return view('profile-following', ['currentlyFollowing' => $currentlyFollowing, 'firstName' => $user->first_name, 'lastName' => $user->last_name, 'user' => $user->id]);
     }
 }

@@ -16,6 +16,8 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    @vite(['resources/css/homepage.css'])
+    @vite(['resources/js/app.js'])
 
  <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -32,7 +34,7 @@
                 <div class="flex items-center">
                     <div class="hidden md:block">
                         <a href="{{ route('homefeed.show') }}" class="text-white hover:opacity-70 px-3 py-2 rounded-md text-2xl font-bold">Home</a>
-                        <a href="/profile/{{$user->id}}" class="text-white hover:opacity-70 px-3 py-2 rounded-md text-2xl font-bold">Profile</a>
+                        <a href="/profile/{{auth()->user()->id}}" class="text-white hover:opacity-70 px-3 py-2 rounded-md text-2xl font-bold">Profile</a>
                         <form class="inline pt-3" method="POST" action="/logout">
                             @csrf
                             <button class=" text-white hover:opacity-75 px-3 py-2 rounded-md text-2xl font-bold" type="submit">Logout</button>
@@ -57,7 +59,7 @@
         <div class="md:hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="{{ route('homefeed.show') }}" class="text-white hover:opacity-70 px-3 py-2 rounded-md text-2xl font-bold">Home</a>
-                <a href="/profile/{{$user->id}}" class="text-white hover:opacity-70 px-3 py-2 rounded-md text-2xl font-bold">Profile</a>
+                <a href="/profile/{{auth()->user()->id}}" class="text-white hover:opacity-70 px-3 py-2 rounded-md text-2xl font-bold">Profile</a>
                 <form class="inline pt-3" method="POST" action="/logout">
                     @csrf
                     <button class="text-white hover:opacity-70 px-3 py-2 rounded-md text-2xl font-bold" type="submit">Logout</button>
@@ -72,7 +74,7 @@
    {{$slot}}
 </main>
 
-<footer class="bg-light py-3 "style="border-radius: 5px">
+<footer class="bg-light py-3 ">
     <div class="container">
         <div class="row">
             <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">

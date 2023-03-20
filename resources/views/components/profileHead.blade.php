@@ -2,7 +2,7 @@
     <div class="container pt-2">
     <div class="row">
         <div class="col-2 pt-4 ">
-            <img src="/storage/{{$user->profile_picture}}"
+            <img src="{{$user->profileImage()}}"
                 alt="wrapkit" class="rounded-circle img-fluid w-100"/>
         </div>
 
@@ -48,11 +48,11 @@
                 <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#signupModal" style="background-color: dimgray">Edit Avatar</button>
                 @endif
             </div>
-            <div class="ps-3">
-                @if($user->id == Auth::user()->id)
-                <button class="btn btn-secondary"><a href="/profile/{{$user->id}}/edit">Edit Profile</a></button>
-                @endif
-            </div>
+                <div class="ps-3">
+                    @if($user->id == Auth::user()->id)
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#profileModal" style="background-color: dimgray">Edit Profile</button>
+                    @endif
+                </div>
                 <div class="ps-3">
                     @if($user->id == Auth::user()->id)
                         <button class="btn btn-secondary"> <a href="/p/create">Add  New Post</a></button>
@@ -79,7 +79,9 @@
             </div>
 
         </div>
-    <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+        {{--Profile Picture--}}
+
+        <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-blue-100">
@@ -91,7 +93,7 @@
                     <form method="POST" action="/i" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <label for="image" class="col-md-4 col-form-label">Post Image</label>
+                            <label for="image" class="col-md-4 col-form-label">Update Profile Picture</label>
 
                             <input type="file" class="form-control-file" id="image" name="profile_picture">
 
@@ -100,7 +102,7 @@
                             @endif
                         </div>
                     <div class="pt-2">
-                        <button type="submit" class="btn btn-info">Post</button>
+                        <button type="submit" class="btn btn-info">Save</button>
                     </div>
                     </form>
                 </div>
@@ -108,36 +110,91 @@
         </div>
     </div>
 
-
-        <div class="modal fade" id="follow" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+{{-- Profile Edit--}}
+        <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header bg-blue-100">
-                        <h5 class="modal-title" id="signupModalLabel">Upload Profile Picture</h5>
-                        <button type="button" class="text-gray-400 text-3xl font-bold hover:text-gray-500 focus:outline-none focus:text-gray-500 transition ease-in-out duration-150" data-bs-dismiss="modal" aria-label="Close">
+                        <h5 class="modal-title" id="signupModalLabel">Edit Your Profile Details</h5>
+                        <button type="button" class=    "text-gray-400 text-3xl font-bold hover:text-gray-500 focus:outline-none focus:text-gray-500 transition ease-in-out duration-150" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span></button>
                     </div>
                     <div class="modal-body bg-blue-100">
-                        <form method="POST" action="/i" enctype="multipart/form-data">
+                        <form class="mx-1 mx-md-4" method="POST" action="/profile/{{$user->id}}" enctype="multipart/form-data"  >
                             @csrf
-                            <div class="row">
-                                <label for="image" class="col-md-4 col-form-label">Post Image</label>
+                            @method('PATCH')
 
+                            <div class="d-flex flex-row align-items-center mb-4">
+
+                                <div class="form-outline flex-fill mb-0">
+                                    <input type="text" id="form3Example1c" name="first_name" value="{{old('first_name')?? $user->first_name}}" class="form-control" />
+                                    <label class="form-label" for="form3Example1c">First Name</label>
+                                </div>
                             </div>
-                            <button type="submit" class="btn ">Sign Up</button>
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <input type="text" id="form3Example1c" value="{{old('last_name')?? $user->last_name}}" name="last_name" class="form-control" />
+                                    <label class="form-label" for="form3Example1c">Last Name</label>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                                <textarea name="bio" cols="20" rows="6" type="text" class="form-control"
+                                                          placeholder="Bio"></textarea>
+                                    <label class="form-label" for="form3Example4c">Bio</label>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row align-items-center  mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <label for="gender" class="form-label">Gender</label>
+                                    <select class="form-select" id="gender" name="gender">
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <label for="address" class="form-label">Address</label>
+                                    <textarea name="address" class="form-control" id="address" rows="3" placeholder="Enter address"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                    <label for="dob" class="form-label">Date of Birth</label>
+                                    <input name="date_of_birth" type="date" class="form-control" id="dob" pattern="\d{4}-\d{2}-\d{2}" required>
+
+                                </div>
+                            </div>
+
+                            <div class="form-check d-flex flex-row align-items-center mb-4">
+                                <div class="form-outline flex-fill mb-0">
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                <button type="submit" class="btn btn-info">Save Changes</button>
+                                <button class="btn  btn-lg"><a href="/profile/{{$user->id}}">Cancel</a> </button>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="profile-slot-content">
-            {{$slot}}
-        </div>
-
-</div>
-<div>
-</div>
+    </div>
+    </div>
+    <div class="container pt-1">
+        {{$slot}}
     </div>
 </x-main>
+
+
+
+
+
+
 
 

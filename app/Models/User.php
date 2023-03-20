@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -60,6 +61,11 @@ class User extends Authenticatable
 
     public function userFollowing(){
         return $this->hasMany(Follow::class, 'user_id');
+    }
+    public function profileImage(){
+        $imagePath=($this->profile_picture) ? $this->profile_picture : 'profile/rFgRcY72UoDwxKBtjKN4gaVGBxiyj4nhx9h0HclO.png';
+        return  '/storage/'.$imagePath;
+
     }
 
 }

@@ -10,6 +10,21 @@ use App\Models\Follow;
 
 class ProfileController extends Controller
 {
+    public function homefeed()
+    { $currentlyFollowing = 0;
+        if (auth()->check()) {
+        $user=Auth::user();
+        $cards= User::inRandomOrder()->paginate(8);
+            $currentlyFollowing= Follow::where([['user_id', '=', auth()->user()->id],['followinguser', '=', $user->id]])->count();
+        }
+
+        return view('HomeFeedPage.card',[ 'followings' => $user->userFollowing()->latest()->get(),'currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name,'user'=>$user,'cards'=>$cards]);
+
+
+
+    }
+
+
     public function index(User $user){
         $currentlyFollowing = 0;
 
@@ -27,7 +42,6 @@ public function edit(User $user){
 
 }
 public function update(User $user){
-        $this->authorize('update');
         $data = request()->validate([
                 'first_name'=>'required',
                 'last_name' => 'required',
@@ -46,12 +60,14 @@ public function store(){
     $data= request()->validate([
         'profile_picture'=>['required','image'],
     ]);
-    $user= Auth::user();
     $imagePath = request('profile_picture')->store('profile', 'public');
+    $image=Image::make(public_path("storage/{$imagePath}"))->fit(450,450);
+    $image->save();
 
+    $user=Auth::user();
     $user->profile_picture= $imagePath;
     $user->save();
-    return redirect('/profile/'.$user->id)->with('message','You have successfully changed your avatar');
+    return redirect('/profile/'.$user->id)->with('success','You have successfully changed your avatar');
 
 
 
