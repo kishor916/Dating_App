@@ -67,15 +67,15 @@ class User extends Authenticatable
         return $this->hasMany(Message::class, 'receiver_id');
     }
 
-    public function sendMessage(User $receiver, $message)
-    {
-        if ($this->userFollowing($receiver) && $receiver->userFollowing($this)) {
-            $this->sentMessages()->create([
-                'recipient_id' => $receiver->id,
-                'message' => $message,
-            ]);
-        }
-    }
+//    public function sendMessage(User $receiver, $message)
+//    {
+//        if ($this->userFollowing($receiver) && $receiver->userFollowing($this)) {
+//            $this->sentMessages()->create([
+//                'receiver_id' => $receiver->id,
+//                'message' => $message,
+//            ]);
+//        }
+//    }
     //only checks if the sender follows the recipeint or not
 //    public function sendMessage(User $recipient, $message)
 //    {

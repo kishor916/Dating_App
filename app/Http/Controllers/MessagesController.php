@@ -24,20 +24,26 @@ class MessagesController extends Controller
         })->orWhere(function ($query) use ($user){
             $query->where('sender_id', $user->id)
                 ->where('receiver_id', auth()->id());
-        })->with('sender')
-            ->latest()
+        })->with('sender')->with('receiver')
+            ->orderBy('created_at', 'desc')
             ->get();
-
-        return view('messages-show.blade.php', compact('user', 'messages'));
+//        dd($messages);
+        return view('messages-show', compact('user', 'messages'));
     }
 
-    public function store(Request $request, User $user)
+    public function store(User $user,Request $request)
     {
-        $request->validate([
+
+        $data = $request->validate([
             'message' => 'required'
         ]);
 
-        auth()->user()->sendMessage($user, $request->message);
+
+        Message::create([
+            'sender_id' => auth()->user()->id,
+            'receiver_id' => $user->id,
+            'message' => $data['message']
+        ]);
 
         return redirect()->back();
     }
