@@ -19,10 +19,11 @@
             <input type="text" class="form-control" id="distance" name="distance" placeholder="Enter distance in km...">
             <div class="input-group-append">
               <select class="form-control" id="distance" name="distance">
-                <option value="10">10 km</option>
-                <option value="15">15 km</option>
-                <option value="20">20 km</option>
+                <option value="15">50 km</option>
                 <option value="40">40 km</option>
+                <option value="20">20 km</option>
+                <option value="15">15 km</option>
+                <option value="10">10 km</option>
               </select>
             </div>
           </div>
