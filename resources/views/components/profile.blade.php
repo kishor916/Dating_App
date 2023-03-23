@@ -30,7 +30,7 @@
                         @endif
 
                         @if($currentlyFollowing && $currentFollowers)
-                            <button class="btn"><a class="btn btn-primary" href={{route('messages.create')}}>Message</a></button>
+                            <button class="btn"><a class="btn btn-primary" href="/profile/{{$user}}/message">Message</a></button>
                         @endif
 
                         @if(auth()->user()->id == $user)

@@ -16,7 +16,7 @@ Route::post('/logout',[UserController::class, 'logout']);
 Route::get('/profile/{user}',[UserController::class,'profile']);
 Route::get('profile/{user}/followers', [UserController::class, 'profileFollowers']);
 Route::get('profile/{user}/following', [UserController::class, 'profileFollowing']);
-
+Route::get('/profile/{user}/message',[MessagesController::class, 'message']);
 //Follow related routes
 
 Route::post('/create-follow/{user}',[FollowController::class, 'createFollow']);

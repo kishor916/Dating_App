@@ -11,6 +11,7 @@ class MessagesController extends Controller
     public function inbox(){
          $messages = auth()->user()->receivedMessages()
          ->with('sender')
+
             ->latest()->get();
 
          return view('messages-inbox', compact('messages'));
@@ -51,5 +52,10 @@ class MessagesController extends Controller
 //    public function createMessage(){
 //        return view('create-message');
 //    }
+
+    public function message(User $user){
+
+        return view('message-profile',['user' => $user]);
+    }
 
 }
