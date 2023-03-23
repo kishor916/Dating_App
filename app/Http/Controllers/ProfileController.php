@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use GuzzleHttp\Client;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use App\Models\Follow;
+use Spatie\Geocoder\Geocoder;
 
 class ProfileController extends Controller
 {
@@ -19,8 +22,6 @@ class ProfileController extends Controller
         }
 
         return view('HomeFeedPage.card',[ 'followings' => $user->userFollowing()->latest()->get(),'currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name,'user'=>$user,'cards'=>$cards]);
-
-
 
     }
 
@@ -46,10 +47,26 @@ public function update(User $user){
                 'first_name'=>'required',
                 'last_name' => 'required',
                 'gender' => 'required',
+                'biography'=>'required',
                 'date_of_birth' => 'required',
                 'address' => 'required',
         ]);
-        auth()->user()->update($data);
+    $client = new Client();
+    $geocoder = new Geocoder($client);
+    $geocoder->setApiKey('AIzaSyDsDbf6HI9VCkiCZaR3udlrz8lslseyC5o');
+    $result = $geocoder->getCoordinatesForAddress($data['address']);
+
+    if ($result) {
+        $latitude = $result['lat'];
+        $longitude = $result['lng'];
+        $data['latitude'] = $latitude;
+        $data['longitude'] = $longitude;
+    } else {
+        return redirect()->back()->withErrors(['address' => 'Invalid address']);
+    }
+
+    auth()->user()->update($data);
+
         return redirect("/profile/{$user->id}");
 
 
@@ -72,6 +89,16 @@ public function store(){
 
 
 }
+private function getSharedData($user){
+    $currentlyFollowing = 0;
+
+//        does the current logged-in user have a follow that matched the $user above
+    if (auth()->check()){
+//            return $user->followers()->latest()->get();
+        $currentlyFollowing= Follow::where([['user_id', '=', auth()->user()->id],['followinguser', '=', $user->id]])->count();
+    }
+    View::share('sharedData',['currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name,'profile_picture'=> $user->profile_picture,'user'=>$user]);
+}
 
     public function profileFollower(User $user){
         $currentlyFollowing = 0;
@@ -82,18 +109,17 @@ public function store(){
             $currentlyFollowing= Follow::where([['user_id', '=', auth()->user()->id],['followinguser', '=', $user->id]])->count();
         }
 
-        return view('Profiles.profile-followers',['followers' =>$user->followers()->latest()->get(),'currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name,'user'=>$user]);
+        return view('Profiles.profile-followers',['currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name,'profile_picture'=> $user->profile_picture,'user'=>$user,'followers' =>$user->followers()->latest()->get()]);
     }
     public function profileFollowing(User $user){
         $currentlyFollowing = 0;
 
 //        does the current logged-in user have a follow that matched the $user above
         if (auth()->check()){
-//            return $user->userFollowing()->latest()->get();
+//            return $user->followers()->latest()->get();
             $currentlyFollowing= Follow::where([['user_id', '=', auth()->user()->id],['followinguser', '=', $user->id]])->count();
         }
-
-        return view('Profiles.profile-following',[ 'followings' => $user->userFollowing()->latest()->get(),'currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name,'user'=>$user]);
+        return view('Profiles.profile-followers',['currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name,'profile_picture'=> $user->profile_picture,'user'=>$user,'followers' =>$user->followers()->latest()->get()]);
     }
 
 }

@@ -1,15 +1,14 @@
 <?php
 
 namespace App\Models;
-
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
     protected $table = 'users';
@@ -27,7 +26,8 @@ class User extends Authenticatable
         'date_of_birth',
         'address',
         'latitude',
-        'longitude'
+        'longitude',
+        'biography'
 
     ];
 
@@ -47,7 +47,7 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'email_verified_at' => 'boolean',
     ];
 
     public function posts(){
@@ -67,5 +67,16 @@ class User extends Authenticatable
         return  '/storage/'.$imagePath;
 
     }
+   /* public function sendEmailVerificationNotification()
+    {
+        $this->notify(new verifyEmailNotification($this->email_verification_token));
+    }
+    public function markEmailAsVerified()
+    {
+        return $this->forceFill([
+            'email_verified'=>true,
+            'email_verification_token'=>null
+        ])->save();
+    }*/
 
 }

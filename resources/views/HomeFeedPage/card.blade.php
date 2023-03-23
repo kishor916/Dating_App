@@ -10,14 +10,25 @@
                     <div class="col-md-3 mb-3">
                         <div class="card" style="width: 18rem;">
 
-                            <img src="/storage/{{$card->profile_picture}}" class="card-img-top" alt="Doctor 1"
-                                 width="300"
-                                 height="200">
+                            <img src="{{$card->profileImage()}}" class="card-img-top" alt="Doctor 1">
                             <div class="card-body">
                                 <h5 class="card-title">{{$card->first_name}} {{$card->last_name}}</h5>
                                 <p class="card-text">{{$card->gender}}</p>
                                 <a href="/profile/{{$card->id}}" class="btn btn-primary mr-2">View Profile</a>
-                                <a href="#" class="btn btn-success">Follow</a>
+                               {{-- @if(!$currentlyFollowing AND auth()->user()->id !== $card->id)
+                                    <form class="ml-2 d-inline" action="/create-follow/{{$card->id}}" method="POST">
+                                        @csrf
+                                        <button class="btn btn-primary btn-sm">Follow <i class="fas fa-user-plus"></i></button>
+                                        <!-- <button class="btn btn-danger btn-sm">Stop Following <i class="fas fa-user-times"></i></button> -->
+                                    </form>
+                                @endif
+                                @if($currentlyFollowing)
+                                    <form class="ml-2 d-inline" action="/remove-follow/{{$card->id}}" method="POST">
+                                        @csrf
+                                        <button class="btn btn-primary btn-sm">Unfollow <i class="fas fa-user-plus"></i></button>
+                                        <!-- <button class="btn btn-danger btn-sm">Stop Following <i class="fas fa-user-times"></i></button> -->
+                                    </form>
+                                @endif--}}
                             </div>
                         </div>
                     </div>

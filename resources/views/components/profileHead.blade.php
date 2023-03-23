@@ -1,4 +1,4 @@
-<x-main>
+<x-app>
     <div class="container pt-2">
     <div class="row">
         <div class="col-2 pt-4 ">
@@ -69,7 +69,7 @@
 
             <div class="pt-2">
                 <p class="text-xl font-bold">Bio</p>
-            <p class="px-2">{{$user->bio}}</p>
+            <p class="px-2 text-back">{{$user->biography}}</p>
             </div>
 
             <div class="profile-nav nav nav-tabs pt-2 mb-4">
@@ -139,15 +139,14 @@
                             </div>
                             <div class="d-flex flex-row align-items-center mb-4">
                                 <div class="form-outline flex-fill mb-0">
-                                                <textarea name="bio" cols="20" rows="6" type="text" class="form-control"
-                                                          placeholder="Bio"></textarea>
-                                    <label class="form-label" for="form3Example4c">Bio</label>
+                                    <textarea id="form3Example1c" name="biography" value="{{old('biography')?? $user->biography}}"  cols="5" rows="5" class="form-control"></textarea>
+                                    <label class="form-label" for="form3Example4c">Biography</label>
                                 </div>
                             </div>
                             <div class="d-flex flex-row align-items-center  mb-4">
                                 <div class="form-outline flex-fill mb-0">
-                                    <label for="gender" class="form-label">Gender</label>
-                                    <select class="form-select" id="gender" name="gender">
+                                    <label for="gender" value="{{old('gender')?? $user->gender}}" class="form-label">Gender</label>
+                                    <select class="ar-select" id="gender" name="gender">
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
                                         <option value="other">Other</option>
@@ -157,21 +156,16 @@
 
                             <div class="d-flex flex-row align-items-center mb-4">
                                 <div class="form-outline flex-fill mb-0">
-                                    <label for="address" class="form-label">Address</label>
-                                    <textarea name="address" class="form-control" id="address" rows="3" placeholder="Enter address"></textarea>
+                                    <label for="address"   class="form-label">Address</label>
+                                    <input type="text" value="{{old('address')?? $user->address}}" name="address" class="form-control" id="address" rows="3" placeholder="Enter address"></input>
                                 </div>
                             </div>
 
                             <div class="d-flex flex-row align-items-center mb-4">
                                 <div class="form-outline flex-fill mb-0">
-                                    <label for="dob" class="form-label">Date of Birth</label>
-                                    <input name="date_of_birth" type="date" class="form-control" id="dob" pattern="\d{4}-\d{2}-\d{2}" required>
+                                    <label for="date_of_birth" class="form-label">Date of Birth</label>
+                                    <input name="date_of_birth" type="date" class="form-control"  value="{{old('date_of_birth')?? $user->date_of_birth}}" id="dob" pattern="\d{4}-\d{2}-\d{2}" required>
 
-                                </div>
-                            </div>
-
-                            <div class="form-check d-flex flex-row align-items-center mb-4">
-                                <div class="form-outline flex-fill mb-0">
                                 </div>
                             </div>
 
@@ -189,7 +183,7 @@
     <div class="container pt-1">
         {{$slot}}
     </div>
-</x-main>
+</x-app>
 
 
 

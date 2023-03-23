@@ -15,9 +15,13 @@ use App\Http\Controllers\UserController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Auth::routes([
+    'verify'=>true
+]);
 Route::get('/',[UserController::class, "showCorrectHomepage"])->name('home');
 
-Route::get('/homepagefeed',[UserController::class,'homefeed'])->name('homefeed.show');
+Route::get('/homepagefeed',[UserController::class,'homefeed'])->name('homefeed.show')->middleware('verified');
 
 Route::post('/register',[UserController::class, 'register']);
 Route::post('/login',[UserController::class, 'login'])->name('login');

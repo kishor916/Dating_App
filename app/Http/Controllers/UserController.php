@@ -7,6 +7,7 @@ use App\Models\Follow;
 use App\Models\User;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -74,8 +75,10 @@ class UserController extends Controller
         }
 
         $incomingFields['password'] = password_hash($incomingFields['password'], PASSWORD_BCRYPT);
+        $incomingFields['verification_token']=sha1(time());
 
-        User::create($incomingFields);
+        $user=User::create($incomingFields);
+        event(new Registered($user));
 
         return 'file has been registered';
     }
