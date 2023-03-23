@@ -16,12 +16,10 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Auth::routes([
-    'verify'=>true
-]);
+
 Route::get('/',[UserController::class, "showCorrectHomepage"])->name('home');
 
-Route::get('/homepagefeed',[UserController::class,'homefeed'])->name('homefeed.show')->middleware('verified');
+Route::get('/homepagefeed',[UserController::class,'homefeed'])->name('homefeed.show');
 
 Route::post('/register',[UserController::class, 'register']);
 Route::post('/login',[UserController::class, 'login'])->name('login');

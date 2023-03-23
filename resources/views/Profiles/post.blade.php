@@ -1,5 +1,5 @@
 <x-profileHead :firstName="$firstName" :lastName="$lastName" :user="$user" :currentlyFollowing="$currentlyFollowing">
-    <div class="row pt-5">
+    <div class="row pt-5 bg-white m-4">
         @foreach($user->posts as $post)
             <div class="col-4 pb-4">
 

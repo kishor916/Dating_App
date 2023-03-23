@@ -74,8 +74,8 @@
 
             <div class="profile-nav nav nav-tabs pt-2 mb-4">
                 <a href="/profile/{{$user->id}}" class="profile-nav-link text-xl nav-item text-black nav-link {{ Request::segment(3) == "" ? "active" : '' }} "><span><strong>{{$user->posts->count()}}</strong></span> Posts:</a>
-                <a href="/profile/{{$user->id}}/follower" class="profile-nav-link text-xl text-black nav-item nav-link {{Request::segment(3) == "follower" ? "active": ""}} "> <span><strong></strong></span> Followers</a>
-                <a href="/profile/{{$user->id}}/following" class="profile-nav-link text-xl text-black nav-item nav-link {{ Request::segment(3) == "following" ? "active" : "" }} ">Following</a>
+                <a href="/profile/{{$user->id}}/follower" class="profile-nav-link text-xl text-black nav-item nav-link {{Request::segment(3) == "follower" ? "active": ""}} "> <span><strong>{{$user->followers->count()}}</strong></span> Followers</a>
+                <a href="/profile/{{$user->id}}/following" class="profile-nav-link text-xl text-black nav-item nav-link {{ Request::segment(3) == "following" ? "active" : "" }} "><span><strong>{{$user->userFollowing->count()}}</strong></span> Following</a>
             </div>
 
         </div>
@@ -139,13 +139,13 @@
                             </div>
                             <div class="d-flex flex-row align-items-center mb-4">
                                 <div class="form-outline flex-fill mb-0">
-                                    <textarea id="form3Example1c" name="biography" value="{{old('biography')?? $user->biography}}"  cols="5" rows="5" class="form-control"></textarea>
+                                    <textarea id="form3Example1c" name="biography" value="{{$user->biography}}" placeholder="{{$user->biography}}"  cols="5" rows="5" class="form-control"></textarea>
                                     <label class="form-label" for="form3Example4c">Biography</label>
                                 </div>
                             </div>
                             <div class="d-flex flex-row align-items-center  mb-4">
                                 <div class="form-outline flex-fill mb-0">
-                                    <label for="gender" value="{{old('gender')?? $user->gender}}" class="form-label">Gender</label>
+                                    <label for="gender" class="form-label">Gender</label>
                                     <select class="ar-select" id="gender" name="gender">
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>

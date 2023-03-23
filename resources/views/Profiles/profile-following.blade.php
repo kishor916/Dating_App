@@ -1,13 +1,15 @@
-<x-profileHead :firstName="$firstName" :lastName="$lastName"  :user="$user" :currentlyFollowing="$currentlyFollowing" :profile_picture="$profile_picture">
-<div>
-        @foreach($followings as $following)
+<x-profileHead :firstName="$firstName" :lastName="$lastName"  :user="$user" :currentlyFollowing="$currentlyFollowing">
+        <div class="p-3 m-4 bg-white">
+            @foreach($followings as $following)
+                <li class="list-group-item">
+                    <a href="/profile/{{$following->userBeingFollowed->id}}" class="d-flex align-items-center text-decoration-none">
+                        <img class="rounded-circle img-fluid mr-3 " src="{{$following->userBeingFollowed->profileImage()}}" alt="no image" width="60" height="60">
+                        <span>{{$following->userBeingFollowed->first_name}} {{$following->userBeingFollowed->last_name}}</span>
+                    </a>
+                </li>
+            @endforeach
 
-        <a href="/profile/{{$following->userBeingFollowed->id}}">
-            <img class="avatar-tiny w-10" src="{{dd($following->userBeingFollowed->profile_picture)}}"> {{$following->userBeingFollowed->first_name}} {{$following->userBeingFollowed->last_name}}
-        </a>
-    @endforeach
-</div>
-
+        </div>
 
 </x-profileHead>
 

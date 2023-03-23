@@ -109,17 +109,18 @@ private function getSharedData($user){
             $currentlyFollowing= Follow::where([['user_id', '=', auth()->user()->id],['followinguser', '=', $user->id]])->count();
         }
 
-        return view('Profiles.profile-followers',['currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name,'profile_picture'=> $user->profile_picture,'user'=>$user,'followers' =>$user->followers()->latest()->get()]);
+        return view('Profiles.profile-followers',['currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name,'user'=>$user,'followers' =>$user->followers()->latest()->get()]);
     }
     public function profileFollowing(User $user){
         $currentlyFollowing = 0;
 
-//        does the current logged-in user have a follow that matched the $user above
+//        does the current logged in user have a follow that matched the $user above
         if (auth()->check()){
-//            return $user->followers()->latest()->get();
+//            return $user->userFollowing()->latest()->get();
             $currentlyFollowing= Follow::where([['user_id', '=', auth()->user()->id],['followinguser', '=', $user->id]])->count();
         }
-        return view('Profiles.profile-followers',['currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name,'profile_picture'=> $user->profile_picture,'user'=>$user,'followers' =>$user->followers()->latest()->get()]);
+
+        return view('Profiles.profile-following',[ 'followings' => $user->userFollowing()->latest()->get(),'currentlyFollowing' => $currentlyFollowing,'firstName'=> $user->first_name, 'lastName' => $user->last_name, 'user' => $user]);
     }
 
 }
