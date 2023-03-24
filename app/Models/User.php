@@ -67,6 +67,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return  '/storage/'.$imagePath;
 
     }
+    public function sentMessages(){
+        return $this->hasMany(Message::class, 'sender_id');
+    }
+
+    public function receivedMessages(){
+        return $this->hasMany(Message::class, 'receiver_id');
+    }
+
    /* public function sendEmailVerificationNotification()
     {
         $this->notify(new verifyEmailNotification($this->email_verification_token));

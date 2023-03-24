@@ -1,4 +1,4 @@
-<x-homefeed :users="$users"  :firstName="$firstName" :lastName="$lastName" :currentlyFollowing="$currentlyFollowing">
+<x-homefeed :users="$users">
 
     <!-- Card section -->
 
@@ -25,13 +25,13 @@
                                         <!-- <button class="btn btn-danger btn-sm">Stop Following <i class="fas fa-user-times"></i></button> -->
                                     </form>
                                 @endif--}}
-                                @if(dd($currentlyFollowing))
+                               {{-- @if(dd($currentlyFollowing))
                                     <form class="ml-2 d-inline" action="/remove-follow/{{$user->id}}" method="POST">
                                         @csrf
                                         <button class="btn btn-primary btn-sm">Unfollow <i class="fas fa-user-plus"></i></button>
                                         <!-- <button class="btn btn-danger btn-sm">Stop Following <i class="fas fa-user-times"></i></button> -->
                                     </form>
-                                @endif
+                                @endif--}}
                             </div>
                         </div>
                     </div>

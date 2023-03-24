@@ -28,6 +28,7 @@
                 @endif
 
 
+
                     {{--@if($currentlyFollowing)
                         <form class="ml-2 d-inline" action="/remove-follow/{{$user}}" method="POST">
                             @csrf
@@ -41,6 +42,11 @@
                         {{--                        <button class="btn btn-primary btn-sm">Message <i class="fas fa-user-plus"></i></button>--}}
                         {{--                    </form>--}}
 
+            </div>
+            <div>
+                @if($currentlyFollowing AND $currentFollowers)
+                    <button class="btn btn-secondary"><a href="/profile/{{$user->id}}/message">Message</a></button>
+                @endif
             </div>
             <div class="d-flex pt-2">
             <div>
@@ -58,7 +64,9 @@
                         <button class="btn btn-secondary"> <a href="/p/create">Add  New Post</a></button>
                     @endif
                 </div>
+
             </div>
+
 
                {{-- <div class="  d-flex pt-2">
                     <div class=" pe-4"><button class="btn  btn-outline-dark text-sm mx-1 font-bold bg-gary-300 hover-gray-500"><span><strong>{{$user->posts->count()}}</strong></span><a href="/profile/{{$user->id}}">  Post</a></button></div>

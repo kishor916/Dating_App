@@ -1,4 +1,4 @@
-<x-profileHead :firstName="$firstName" :lastName="$lastName"  :user="$user" :currentlyFollowing="$currentlyFollowing">
+<x-profileHead :firstName="$firstName" :lastName="$lastName"  :user="$user" :currentlyFollowing="$currentlyFollowing" :currentFollowers="$currentFollowers">
         <div class="p-3 m-4 bg-white">
             @foreach($followings as $following)
                 <li class="list-group-item">

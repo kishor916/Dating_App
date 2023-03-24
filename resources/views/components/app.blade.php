@@ -35,6 +35,7 @@
                     <div class="hidden md:block">
                         <a href="{{ route('homefeed.show') }}" class="text-white hover:opacity-70 px-3 py-2 rounded-md text-2xl font-bold">Home</a>
                         <a href="/profile/{{auth()->user()->id}}" class="text-white hover:opacity-70 px-3 py-2 rounded-md text-2xl font-bold">Profile</a>
+                        <a href="/messages" class="text-white hover:opacity-70 px-3 py-2 rounded-md text-2xl font-bold">Message</a>
                         <form class="inline pt-3" method="POST" action="/logout">
                             @csrf
                             <button class=" text-white hover:opacity-75 px-3 py-2 rounded-md text-2xl font-bold" type="submit">Logout</button>
@@ -60,6 +61,7 @@
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="{{ route('homefeed.show') }}" class="text-white hover:opacity-70 px-3 py-2 rounded-md text-2xl font-bold">Home</a>
                 <a href="/profile/{{auth()->user()->id}}" class="text-white hover:opacity-70 px-3 py-2 rounded-md text-2xl font-bold">Profile</a>
+                <a href="/messages" class="text-white hover:opacity-70 px-3 py-2 rounded-md text-2xl font-bold">Message</a>
                 <form class="inline pt-3" method="POST" action="/logout">
                     @csrf
                     <button class="text-white hover:opacity-70 px-3 py-2 rounded-md text-2xl font-bold" type="submit">Logout</button>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -45,4 +46,9 @@ Route::get('/profile/{user}/following',[ProfileController::class,'profileFollowi
 
 //search
 Route::get('/search',[UserController::class, 'search']);
+
+Route::get('/messages',[MessagesController::class, 'inbox'])->name('messages.create');
+Route::get('/profile/{user}/message',[MessagesController::class, 'message']);
+Route::get('/messages/{user}', [MessagesController::class, 'show'])->name('messages.show');
+Route::post('/messages/{user}',[MessagesController::class, 'store'])->name('messages.store');
 
