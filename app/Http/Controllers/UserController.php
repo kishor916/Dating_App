@@ -7,13 +7,12 @@ use App\Models\Follow;
 use App\Models\User;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\VerifyEmail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Spatie\Geocoder\Geocoder;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\VerifyEmail;
 
 class UserController extends Controller
 {
