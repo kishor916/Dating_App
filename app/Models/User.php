@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -73,6 +74,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function receivedMessages(){
         return $this->hasMany(Message::class, 'receiver_id');
+    }
+
+    public function generateVerificationToken()
+    {
+        $this->verification_token = Str::random(32);
+        $this->save();
     }
 
    /* public function sendEmailVerificationNotification()

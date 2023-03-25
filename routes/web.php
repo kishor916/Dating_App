@@ -52,3 +52,5 @@ Route::get('/profile/{user}/message',[MessagesController::class, 'message']);
 Route::get('/messages/{user}', [MessagesController::class, 'show'])->name('messages.show');
 Route::post('/messages/{user}',[MessagesController::class, 'store'])->name('messages.store');
 
+Route::get('/verify/email/{token}', [UserController::class, 'verifyEmail'])->name('verify.email');
+
