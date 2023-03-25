@@ -23,6 +23,8 @@ Route::get('/',[UserController::class, "showCorrectHomepage"])->name('home');
 Route::get('/homepagefeed',[UserController::class,'homefeed'])->name('homefeed.show');
 
 Route::post('/register',[UserController::class, 'register']);
+
+
 Route::post('/login',[UserController::class, 'login'])->name('login');
 Route::post('/logout', [UserController::class, 'logout'])->name('logout');
 
@@ -53,4 +55,6 @@ Route::get('/messages/{user}', [MessagesController::class, 'show'])->name('messa
 Route::post('/messages/{user}',[MessagesController::class, 'store'])->name('messages.store');
 
 Route::get('/verify/email/{token}', [UserController::class, 'verifyEmail'])->name('verify.email');
+
+
 

@@ -107,7 +107,7 @@ class UserController extends Controller
         $user = User::create($incomingFields);
         $user->generateVerificationToken();
         Mail::to($user->email)->send(new VerifyEmail($user));
-        return "pass";
+        return redirect('/')->with('success', 'Thank you for creating an account. Please verify with the link sent to your email');
     }
 
     /*public function login(Request $request){

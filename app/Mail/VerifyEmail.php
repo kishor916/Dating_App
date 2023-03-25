@@ -45,7 +45,7 @@ class VerifyEmail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'email-verify',
+//            view: 'view.name',
         );
     }
 
@@ -57,5 +57,13 @@ class VerifyEmail extends Mailable
     public function attachments()
     {
         return [];
+    }
+
+    public function build()
+    {
+        return $this->view('verify-email')->with([
+            'user' => $this->user,
+            'url' => route('verify.email', ['token' => $this->user->verification_token]),
+        ]);
     }
 }
