@@ -106,9 +106,8 @@ class UserController extends Controller
         $incomingFields['password'] = password_hash($incomingFields['password'], PASSWORD_BCRYPT);
         $user = User::create($incomingFields);
         $user->generateVerificationToken();
-        dd(Mail::to($user->email)->send(new VerifyEmail($user)));
-
-        return redirect('/')->with('success', 'Thank you for creating an account. Please verify with the link sent to your email');
+        Mail::to($user->email)->send(new VerifyEmail($user));
+        return "pass";
     }
 
     /*public function login(Request $request){
