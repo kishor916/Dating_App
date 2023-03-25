@@ -103,7 +103,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="address" class="form-label">Address</label>
-                                <textarea name="address" class="form-control" id="address" rows="3" placeholder="Enter address"></textarea>
+                                <input type="text" name="address" class="form-control" id="address" placeholder="Enter your address" autocomplete="off">
                             </div>
 
                             <div class="mb-3">
