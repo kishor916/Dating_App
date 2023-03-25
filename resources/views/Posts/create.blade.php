@@ -53,8 +53,12 @@
                     @endif
                 </div>
 
-                <div class="row pt-4">
+                <div class="pt-4">
                     <button class="btn btn-primary">Add New Post</button>
+
+                </div>
+                <div class="pt-4">
+                    <button class="btn btn-primary"><a href="/profile/{{auth()->user()->id}}"Cancel></a></button>
 
                 </div>
 

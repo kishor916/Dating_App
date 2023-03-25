@@ -22,7 +22,7 @@ class UsersTableSeeder extends Seeder
         $latitude = -33.97125160;
         $longitude = 151.11387840;
 
-        for ($i = 0; $i < 500; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             // Generate random coordinates within 100km of the given user
             $coords = $this->getRandomCoordinates($latitude, $longitude, 100);
 

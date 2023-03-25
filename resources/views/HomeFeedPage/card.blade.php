@@ -15,7 +15,8 @@
                                 <h5 class="card-title">{{$card->first_name}} {{$card->last_name}}</h5>
                                 <p class="card-text">{{$card->gender}}</p>
                                 <a href="/profile/{{$card->id}}" class="btn btn-primary mr-2">View Profile</a>
-                               {{-- @if(!$currentlyFollowing AND auth()->user()->id !== $card->id)
+
+                              {{-- @if(auth()->user()->id ==$currentlyFollowing->user_id)
                                     <form class="ml-2 d-inline" action="/create-follow/{{$card->id}}" method="POST">
                                         @csrf
                                         <button class="btn btn-primary btn-sm">Follow <i class="fas fa-user-plus"></i></button>
@@ -28,8 +29,14 @@
                                         <button class="btn btn-primary btn-sm">Unfollow <i class="fas fa-user-plus"></i></button>
                                         <!-- <button class="btn btn-danger btn-sm">Stop Following <i class="fas fa-user-times"></i></button> -->
                                     </form>
-                                @endif--}}
+                                @endif
                             </div>
+                            <div>
+                                @if($currentlyFollowing AND $currentFollowers)
+                                    <button class="btn btn-secondary"><a href="/profile/{{$user->id}}/message">Message</a></button>
+                                @endif
+                            </div>--}}
+                        </div>
                         </div>
                     </div>
 

@@ -20,7 +20,7 @@ use App\Http\Controllers\UserController;
 
 Route::get('/',[UserController::class, "showCorrectHomepage"])->name('home');
 
-Route::get('/homepagefeed',[UserController::class,'homefeed'])->name('homefeed.show');
+Route::get('/homepagefeed',[ProfileController::class,'homefeed'])->name('homefeed.show');
 
 Route::post('/register',[UserController::class, 'register']);
 

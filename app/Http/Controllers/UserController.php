@@ -16,18 +16,6 @@ use App\Mail\VerifyEmail;
 
 class UserController extends Controller
 {
-    public function homefeed()
-    { if (auth()->check()) {
-        $user=Auth::user();
-        $cards= User::inRandomOrder()->paginate(8);
-        return view('HomeFeedPage.card',compact('user','cards'));
-    }else{
-        return view('homepage');
-    }
-
-
-    }
-
     public function showCorrectHomepage()
     {
         return view('homepage');
@@ -107,7 +95,8 @@ class UserController extends Controller
         $user = User::create($incomingFields);
         $user->generateVerificationToken();
         Mail::to($user->email)->send(new VerifyEmail($user));
-        return redirect('/')->with('success', 'Thank you for creating an account. Please verify with the link sent to your email');
+        return "pass";
+           // redirect('/')->with('success', 'Thank you for creating an account. Please verify with the link sent to your email');
     }
 
     /*public function login(Request $request){

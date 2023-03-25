@@ -77,7 +77,7 @@
 
             <div class="pt-2">
                 <p class="text-xl font-bold">Bio</p>
-            <p class="px-2 text-back">{{$user->biography}}</p>
+            <p class="px-2 text-back">{{$user->bio}}</p>
             </div>
 
             <div class="profile-nav nav nav-tabs pt-2 mb-4">
@@ -147,7 +147,7 @@
                             </div>
                             <div class="d-flex flex-row align-items-center mb-4">
                                 <div class="form-outline flex-fill mb-0">
-                                    <textarea id="form3Example1c" name="biography" value="{{$user->biography}}" placeholder="{{$user->biography}}"  cols="5" rows="5" class="form-control"></textarea>
+                                    <textarea id="form3Example1c" name="bio" value="{{$user->bio}}"  cols="5" rows="5" class="form-control"></textarea>
                                     <label class="form-label" for="form3Example4c">Biography</label>
                                 </div>
                             </div>

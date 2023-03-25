@@ -14,15 +14,11 @@ use Spatie\Geocoder\Geocoder;
 class ProfileController extends Controller
 {
     public function homefeed()
-    { $currentlyFollowing = 0;
-        if (auth()->check()) {
+    {
         $user=Auth::user();
         $cards= User::inRandomOrder()->paginate(8);
-            $currentlyFollowing= Follow::where([['user_id', '=', auth()->user()->id],['followinguser', '=', $user->id]])->count();
-        }
 
-        return view('HomeFeedPage.card',[ 'followings' => $user->userFollowing()->latest()->get(),'currentlyFollowing' => $currentlyFollowing,'user'=>$user,'cards'=>$cards]);
-
+        return view('HomeFeedPage.card',[ 'followings' => $user->userFollowing()->latest()->get(),'user' => $user,'cards'=>$cards]);
     }
 
 
