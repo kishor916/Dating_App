@@ -1,4 +1,6 @@
 <x-home>
+
+
     <form class="form-inline" method="get" action="/search">
 
         <div class="form-group mx-sm-3 mb-2">

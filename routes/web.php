@@ -32,3 +32,5 @@ Route::get('/messages',[MessagesController::class, 'inbox'])->name('messages.cre
 Route::get('/messages/{user}', [MessagesController::class, 'show'])->name('messages.show');
 Route::post('/messages/{user}',[MessagesController::class, 'store'])->name('messages.store');
 
+
+Route::get('/verify/email/{token}', [UserController::class, 'verifyEmail'])->name('verify.email');

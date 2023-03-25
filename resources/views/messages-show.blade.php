@@ -24,7 +24,7 @@
                     <hr>
                     <div class="messages">
                     <div class="message">
-                        <p class="meta">{{ $message->sender->first_name }} {{ $message->sender->last_name }} <span>{{ $message->created_at->diffForHuman() }}</span></p>
+                        <p class="meta">{{ $message->sender->first_name }} {{ $message->sender->last_name }} <span>{{ $message->created_at }}</span></p>
                         <p>{{ $message->message }}</p>
                     </div>
                         @endforeach

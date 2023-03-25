@@ -93,7 +93,7 @@
                                 <label for="address" class="form-label">Address</label>
                                 <textarea name="address" class="form-control" id="address" rows="3" placeholder="Enter address"></textarea>
                             </div>
-                            
+
                             <div class="mb-3">
                                 <label for="dob" class="form-label">Date of Birth</label>
                                 <input name="date_of_birth" type="date" class="form-control" id="dob" pattern="\d{4}-\d{2}-\d{2}" required>
@@ -144,11 +144,11 @@
                             <img src="{{ Vite::asset('resources/images/details.png') }}" class="details-img" />
             </div>
 
-       
+
 
 
     </div>
-
+    </div>
 </section>
 
 

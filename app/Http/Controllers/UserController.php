@@ -8,17 +8,22 @@ use App\Models\User;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Spatie\Geocoder\Geocoder;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\VerifyEmail;
 class UserController extends Controller
 {
     public function homefeed()
     {
-        if (auth()->check()) {
+
+        if (auth()->check() ) {
             return view('homefeed');
-        } else {
-            return view('homepage');
+        }
+        else {
+            return view('homepage')->with('error', 'You have not registered');
+
         }
     }
 
@@ -40,9 +45,18 @@ class UserController extends Controller
         ]);
 
         if (auth()->attempt(['email' => $incomingfields['email'], 'password' => $incomingfields['password']])) {
-            $request->session()->regenerate();
-            return redirect('/homepagefeed')->with('success', 'You have successfully logged in.');
-        } else {
+            $user = Auth::user();
+            if (!$user->verified) {
+                Auth::logout();
+                return back()->with('failure', 'Your account has not been verified yet. Please check your email.');
+            }
+            else{
+                $request->session()->regenerate();
+                return redirect('/homepagefeed')->with('success', 'You have successfully logged in.');
+
+            }
+
+                    } else {
             return redirect('/')->with('failure', 'Invalid login.');
         }
     }
@@ -77,9 +91,11 @@ class UserController extends Controller
 
         $incomingFields['password'] = password_hash($incomingFields['password'], PASSWORD_BCRYPT);
 
-        User::create($incomingFields);
+        $user = User::create($incomingFields);
+        $user->generateVerificationToken();
+        Mail::to($user->email)->send(new VerifyEmail($user));
 
-        return redirect('/')->with('success', 'Thank you for creating an account.');
+        return redirect('/')->with('success', 'Thank you for creating an account. Please verify with the link sent to your email');
     }
 
     public function search(Request $request)
@@ -204,5 +220,19 @@ class UserController extends Controller
         return redirect('/')->with('success', 'You are now logged out.');
 
     }
+
+    public function verifyEmail($token)
+    {
+        $user = User::where('verification_token', $token)->firstOrFail();
+
+        $user->verified = true;
+        $user->verification_token = null;
+        $user->email_verified_at = now();
+        $user->save();
+
+        return redirect('/')->with('success', 'Your account has been verified. You can now log in.');
+    }
+
+
 
 }
