@@ -55,10 +55,7 @@
 
                 <div class="pt-4">
                     <button class="btn btn-primary">Add New Post</button>
-
-                </div>
-                <div class="pt-4">
-                    <button class="btn btn-primary"><a href="/profile/{{auth()->user()->id}}"Cancel></a></button>
+                    <button class="btn btn-primary"><a href="/profile/{{auth()->user()->id}}" class="text-white"> Cancel</a></button>
 
                 </div>
 

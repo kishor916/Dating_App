@@ -37,7 +37,7 @@ Route::post('/i',[ProfileController::class,'store']);
 
 Route::get('/profile/{user}',[ProfileController::class,'index']);
 Route::get('/profile/{user}/edit',[ProfileController::class,'edit'])->middleware('auth');
-Route::patch('/profile/{user}',[ProfileController::class,'update']);
+Route::post('/profile/{user}',[ProfileController::class,'update']);
 
 Route::post('/create-follow/{user}',[FollowController::class, 'createFollow']);
 Route::post('/remove-follow/{user}',[FollowController::class, 'removeFollow']);

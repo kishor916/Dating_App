@@ -14,7 +14,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{$card->first_name}} {{$card->last_name}}</h5>
                                 <p class="card-text">{{$card->gender}}</p>
-                                <a href="/profile/{{$card->id}}" class="btn btn-primary mr-2">View Profile</a>
+                                    <span>   <a href="/profile/{{$card->id}}" class="btn btn-primary ml-9 text-align-center">View Profile</a></span>
 
                               {{-- @if(auth()->user()->id ==$currentlyFollowing->user_id)
                                     <form class="ml-2 d-inline" action="/create-follow/{{$card->id}}" method="POST">

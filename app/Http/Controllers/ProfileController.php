@@ -46,9 +46,9 @@ public function update(User $user){
                 'first_name'=>'required',
                 'last_name' => 'required',
                 'gender' => 'required',
-                'biography'=>'required',
                 'date_of_birth' => 'required',
                 'address' => 'required',
+                'bio'=>'required'
         ]);
     $client = new Client();
     $geocoder = new Geocoder($client);

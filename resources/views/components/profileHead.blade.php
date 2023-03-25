@@ -130,7 +130,6 @@
                     <div class="modal-body bg-blue-100">
                         <form class="mx-1 mx-md-4" method="POST" action="/profile/{{$user->id}}" enctype="multipart/form-data"  >
                             @csrf
-                            @method('PATCH')
 
                             <div class="d-flex flex-row align-items-center mb-4">
 
@@ -147,7 +146,7 @@
                             </div>
                             <div class="d-flex flex-row align-items-center mb-4">
                                 <div class="form-outline flex-fill mb-0">
-                                    <textarea id="form3Example1c" name="bio" value="{{$user->bio}}"  cols="5" rows="5" class="form-control"></textarea>
+                                    <textarea id="form3Example1c" name="bio" value="{{old('bio')?? $user->bio}}"  cols="5" rows="5" class="form-control"></textarea>
                                     <label class="form-label" for="form3Example4c">Biography</label>
                                 </div>
                             </div>
